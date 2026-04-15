@@ -6,11 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── NAVBAR scroll shadow + active link ──────────
   const navbar = document.getElementById('navbar');
-  const sections = document.querySelectorAll('section[id], header');
 
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 20);
-    // Active nav link
     let current = '';
     document.querySelectorAll('section[id]').forEach(sec => {
       if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
@@ -46,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     prevBtn.addEventListener('click', () => goto(current - 1));
     nextBtn.addEventListener('click', () => goto(current + 1));
-    // Keyboard navigation when slideshow is visible
     document.addEventListener('keydown', (e) => {
       const rect = track.getBoundingClientRect();
       if (rect.top < window.innerHeight && rect.bottom > 0) {
@@ -54,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'ArrowLeft')  goto(current - 1);
       }
     });
-    // Touch / swipe
     let startX = 0;
     track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend',   e => {
@@ -84,12 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.map-panel').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('maptab-' + tab).classList.add('active');
-      if (tab === 'kml' && !mapInitialized) initMap();
+      if (tab === 'kml' && !mapKMLInitialized) initMapKML();
+      if (tab === 'pie1' && !mapPIE1Initialized) initMapPIE1();
     });
   });
 
   // ── INE MAP PDF ──────────────────────────────────
-  // Try to load assets/mapa_ine_pie1.pdf automatically
   const inePlaceholder = document.getElementById('inePlaceholder');
   const ineFrame       = document.getElementById('ineMapFrame');
   const pdfPath        = 'assets/mapa_ine_pie1.pdf';
@@ -102,11 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
         ineFrame.classList.remove('hidden');
       }
     })
-    .catch(() => { /* placeholder stays visible */ });
+    .catch(() => {});
 
-  // ── LEAFLET MAP ──────────────────────────────────
-  let map = null;
-  let mapInitialized = false;
+  // ── MAPA KML (pestaña 2) ─────────────────────────
+  let mapKML = null;
+  let mapKMLInitialized = false;
   let layerGroups = {};
   let allLayers = [];
 
@@ -119,38 +115,29 @@ document.addEventListener('DOMContentLoaded', () => {
     default:     '#64748B',
   };
 
-  // Cochabamba city center coords
   const COCHABAMBA = [-17.3935, -66.1568];
 
-  function initMap() {
-    if (mapInitialized) return;
-    mapInitialized = true;
+  function initMapKML() {
+    if (mapKMLInitialized) return;
+    mapKMLInitialized = true;
 
-    map = L.map('map').setView(COCHABAMBA, 15);
-
+    mapKML = L.map('map').setView(COCHABAMBA, 15);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a>',
       maxZoom: 19,
-    }).addTo(map);
+    }).addTo(mapKML);
 
-    // Add a reference rectangle for the PIE-1 polygon area (approximate)
-    const pie1bounds = [
-      [-17.406, -66.167],
-      [-17.382, -66.148],
-    ];
+    const pie1bounds = [[-17.406, -66.167], [-17.382, -66.148]];
     L.rectangle(pie1bounds, {
       color: '#1B4F72', weight: 2.5, fillColor: '#1B4F72', fillOpacity: 0.06, dashArray: '6 4'
-    }).addTo(map).bindPopup('<strong>Polígono PIE-1</strong><br/>Distrito 12 · Adela Zamudio');
+    }).addTo(mapKML).bindPopup('<strong>Polígono PIE-1</strong><br/>Distrito 12 · Adela Zamudio');
 
-    // Initialize layer groups
     ['salud', 'gastronomia', 'hospedaje', 'ocio', 'universidad', 'default'].forEach(t => {
-      layerGroups[t] = L.layerGroup().addTo(map);
+      layerGroups[t] = L.layerGroup().addTo(mapKML);
     });
 
-    // KML file input handler
     document.getElementById('kmlFile').addEventListener('change', handleKMLUpload);
 
-    // Try auto-loading KML from assets
     fetch('data/pie1_mapeo.kml')
       .then(r => r.ok ? r.text() : null)
       .then(text => { if (text) loadKMLText(text, 'pie1_mapeo.kml'); })
@@ -167,30 +154,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function loadKMLText(kmlText, filename) {
-    // Clear existing layers
     Object.values(layerGroups).forEach(g => g.clearLayers());
     allLayers = [];
 
     const parser = new DOMParser();
     const kmlDoc = parser.parseFromString(kmlText, 'text/xml');
     const placemarks = kmlDoc.querySelectorAll('Placemark');
-
     const counts = {};
     const bounds = [];
 
     placemarks.forEach(pm => {
-      const name = pm.querySelector('name')?.textContent?.trim() || 'Sin nombre';
-      const desc = pm.querySelector('description')?.textContent?.trim() || '';
+      const name   = pm.querySelector('name')?.textContent?.trim() || 'Sin nombre';
+      const desc   = pm.querySelector('description')?.textContent?.trim() || '';
       const coords = pm.querySelector('coordinates')?.textContent?.trim();
-
       if (!coords) return;
 
-      // Detect type from name/description
-      const type = detectType(name + ' ' + desc);
+      const type  = detectType(name + ' ' + desc);
       const color = COLORS[type] || COLORS.default;
       counts[type] = (counts[type] || 0) + 1;
 
-      // Parse coordinates (KML: lon,lat,alt)
       const parts = coords.trim().split(/\s+/)[0].split(',');
       if (parts.length < 2) return;
       const lng = parseFloat(parts[0]);
@@ -201,11 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const icon = L.divIcon({
         className: '',
-        html: `<div style="
-          width:14px;height:14px;border-radius:50%;
-          background:${color};border:2.5px solid white;
-          box-shadow:0 2px 8px rgba(0,0,0,.3)">
-        </div>`,
+        html: `<div style="width:14px;height:14px;border-radius:50%;background:${color};border:2.5px solid white;box-shadow:0 2px 8px rgba(0,0,0,.3)"></div>`,
         iconSize: [14, 14],
         iconAnchor: [7, 7],
       });
@@ -219,9 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
       allLayers.push(marker);
     });
 
-    if (bounds.length > 0) map.fitBounds(bounds, { padding: [40, 40] });
-
-    // Show stats
+    if (bounds.length > 0) mapKML.fitBounds(bounds, { padding: [40, 40] });
     showKMLStats(counts, placemarks.length);
     document.getElementById('kmlFilename').textContent = filename + ` (${placemarks.length} establecimientos)`;
   }
@@ -245,42 +221,126 @@ document.addEventListener('DOMContentLoaded', () => {
     const statsEl = document.getElementById('kmlStats');
     const content = document.getElementById('kmlStatsContent');
     const typeLabels = { salud: '🏥 Salud', gastronomia: '🍽 Gastro', hospedaje: '🏨 Hospedaje', ocio: '🎭 Ocio', universidad: '🎓 Univ.', default: '📍 Otro' };
-    let html = `<div class="kml-stats-grid">
-      <div class="kml-stat-item">
-        <div class="kml-stat-num">${total}</div>
-        <div class="kml-stat-label">Total establecimientos</div>
-      </div>`;
+    let html = `<div class="kml-stats-grid"><div class="kml-stat-item"><div class="kml-stat-num">${total}</div><div class="kml-stat-label">Total establecimientos</div></div>`;
     Object.entries(counts).forEach(([type, n]) => {
-      html += `<div class="kml-stat-item">
-        <div class="kml-stat-num">${n}</div>
-        <div class="kml-stat-label">${typeLabels[type] || type}</div>
-      </div>`;
+      html += `<div class="kml-stat-item"><div class="kml-stat-num">${n}</div><div class="kml-stat-label">${typeLabels[type] || type}</div></div>`;
     });
     html += '</div>';
     content.innerHTML = html;
     statsEl.classList.remove('hidden');
   }
 
-  // Filter buttons
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const type = btn.dataset.type;
-
-      if (!map || !mapInitialized) return;
-
+      if (!mapKML || !mapKMLInitialized) return;
       Object.entries(layerGroups).forEach(([t, group]) => {
-        if (type === 'all' || type === t) {
-          map.addLayer(group);
-        } else {
-          map.removeLayer(group);
-        }
+        if (type === 'all' || type === t) mapKML.addLayer(group);
+        else mapKML.removeLayer(group);
       });
     });
   });
 
-  // ── SMOOTH SCROLL for CTA buttons ────────────────
+  // ── MAPA PIE-1 (pestaña 3) con GeoJSON ──────────
+  let mapPIE1 = null;
+  let mapPIE1Initialized = false;
+
+  const TIPO_CONFIG = {
+    'Gastronomía': { color: '#E65100', emoji: '🍽️' },
+    'Hospedaje':   { color: '#6A1B9A', emoji: '🏨' },
+    'Ocio':        { color: '#C2185B', emoji: '🎭' },
+    'Salud':       { color: '#B71C1C', emoji: '🏥' },
+    'Universidad': { color: '#1A237E', emoji: '🎓' },
+  };
+
+  function makeDot(color, size = 14) {
+    return L.divIcon({
+      className: '',
+      html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2.5px solid white;box-shadow:0 2px 8px rgba(0,0,0,.3)"></div>`,
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
+    });
+  }
+
+  function initMapPIE1() {
+    if (mapPIE1Initialized) return;
+    mapPIE1Initialized = true;
+
+    mapPIE1 = L.map('map-pie1').setView([-17.3750, -66.1560], 15);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '© <a href="https://carto.com">CARTO</a> · © <a href="https://openstreetmap.org">OpenStreetMap</a>',
+      maxZoom: 19,
+    }).addTo(mapPIE1);
+
+    // Cargar ambos GeoJSON en paralelo
+    Promise.all([
+      fetch('data/infraestructura_PIE1.geojson').then(r => r.json()),
+      fetch('data/actividades_PIE1.geojson').then(r => r.json())
+    ])
+    .then(([gjInfra, gjAct]) => {
+
+      // ── Capa infraestructura ──
+      gjInfra.features.forEach(feat => {
+        const p   = feat.properties;
+        const lon = feat.geometry.coordinates[0];
+        const lat = feat.geometry.coordinates[1];
+        const wifi  = p.wifi === true || p.wifi === 'true';
+        const color = wifi ? '#16a34a' : '#dc2626';
+
+        const popup = `
+          <div style="font-family:Arial,sans-serif;min-width:180px;">
+            <p style="font-weight:bold;color:#1F4E79;margin:0 0 4px;">${p.nombre}</p>
+            <p style="margin:2px 0;font-size:12px;"><b>Tipo:</b> ${p.tipo}</p>
+            <p style="margin:2px 0;font-size:12px;"><b>WiFi:</b>
+              <span style="color:${color};">${wifi ? '✔ Sí' : '✘ No'}</span>
+            </p>
+          </div>`;
+
+        L.marker([lat, lon], { icon: makeDot(color, 16) })
+          .bindPopup(popup)
+          .bindTooltip(`🏛️ ${p.nombre}`, { direction: 'top' })
+          .addTo(mapPIE1);
+      });
+
+      // ── Capa actividades económicas ──
+      gjAct.features.forEach(feat => {
+        const p    = feat.properties;
+        const coords = feat.geometry.coordinates;
+        const lon = coords[0], lat = coords[1];
+        if (!lat || !lon) return;
+
+        const tipo   = (p['Tipo de actor'] || '').trim();
+        const cfg    = TIPO_CONFIG[tipo] || { color: '#64748B', emoji: '📍' };
+
+        const popup = `
+          <div style="font-family:Arial,sans-serif;min-width:200px;">
+            <div style="background:${cfg.color};padding:5px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">
+              <span style="color:white;font-weight:bold;font-size:12px;">${cfg.emoji} ${tipo}</span>
+            </div>
+            <p style="font-weight:bold;color:#1F4E79;margin:0 0 6px;">${p['Nombre del establecimiento'] || ''}</p>
+            <p style="margin:2px 0;font-size:12px;"><b>Estado:</b> ${p['Estado Operativo del Establecimiento'] || '—'}</p>
+            <p style="margin:2px 0;font-size:12px;"><b>Formalización:</b> ${p['Estado de Formalización'] || '—'}</p>
+            <p style="margin:2px 0;font-size:12px;"><b>Web/Redes:</b> ${p['¿Tiene Web o redes sociales activas?'] || '—'}</p>
+            <p style="margin:2px 0;font-size:12px;"><b>Google Maps:</b> ${p['Aparece en Google Maps?'] || '—'}</p>
+          </div>`;
+
+        L.marker([lat, lon], { icon: makeDot(cfg.color, 13) })
+          .bindPopup(popup)
+          .bindTooltip(`${cfg.emoji} ${p['Nombre del establecimiento'] || ''}`, { direction: 'top' })
+          .addTo(mapPIE1);
+      });
+
+    })
+    .catch(err => {
+      console.error('Error cargando GeoJSON:', err);
+      document.getElementById('map-pie1').innerHTML =
+        '<p style="padding:2rem;text-align:center;color:#888;">No se pudieron cargar los datos. Verifica que los archivos GeoJSON estén en la carpeta <code>data/</code>.</p>';
+    });
+  }
+
+  // ── SMOOTH SCROLL ────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
@@ -296,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.querySelectorAll('.cov-fill, .nse-fill').forEach(el => {
-          el.style.width = el.style.width; // trigger reflow
+          el.style.width = el.style.width;
         });
       }
     });
