@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f8f49e2e0b4baca3bd5586a6c0346c07 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+</head>
+<body>
+    
+    
+<div style="
+    position:fixed; top:12px; left:55px; z-index:1000;
+    background:white; padding:10px 16px; border-radius:8px;
+    border-left:5px solid #1F4E79;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15); font-family:Arial,sans-serif;">
+    <p style="margin:0; font-size:15px; font-weight:bold; color:#1F4E79;">
+        Polígono de Innovación Económica 1</p>
+    <p style="margin:2px 0 0; font-size:12px; color:#555;">
+        Inventario de infraestructura pública · GAMC–UNIFRANZ</p>
+</div>
+    
+<div style="
+    position:fixed; bottom:40px; left:12px; z-index:1000;
+    background:white; padding:12px 16px; border-radius:8px;
+    border-left:5px solid #1F6B5A;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    font-family:Arial,sans-serif; font-size:12px; line-height:1.8;">
+    <p style="margin:0 0 6px; font-weight:bold; color:#1F4E79;">Leyenda</p>
+    <p style="margin:0;">🟢 <b>Verde</b> — Con WiFi municipal</p>
+    <p style="margin:0;">🔴 <b>Rojo</b> — Sin WiFi municipal</p>
+    <hr style="margin:6px 0; border-color:#eee;">
+    <p style="margin:0;">🌳 Parques</p>
+    <p style="margin:0;">📍 Plazas y plazuelas</p>
+    <p style="margin:0;">📷 Atractivos turísticos</p>
+    <p style="margin:0;">🎓 Espacios culturales</p>
+    <p style="margin:0;">🌿 Áreas verdes</p>
+</div>
+    
+<div style="
+    position:fixed; top:12px; right:12px; z-index:1000;
+    background:white; padding:12px 16px; border-radius:8px;
+    border-left:5px solid #E74C3C;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    font-family:Arial,sans-serif; font-size:12px; line-height:1.9;">
+    <p style="margin:0 0 6px; font-weight:bold; color:#1F4E79;">Resumen infraestructura</p>
+    <p style="margin:0;">📌 Total puntos: <b>16</b></p>
+    <p style="margin:0;">📶 Con WiFi: <b>2</b></p>
+    <p style="margin:0; color:#cc0000;">❌ Sin WiFi: <b>14</b></p>
+    <hr style="margin:6px 0; border-color:#eee;">
+    <p style="margin:0; font-size:11px; color:#888;">Brecha de conectividad:<br>
+        <b style="color:#cc0000; font-size:13px;">88% sin cobertura</b>
+    </p>
+</div>
+    
+            <div class="folium-map" id="map_f8f49e2e0b4baca3bd5586a6c0346c07" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f8f49e2e0b4baca3bd5586a6c0346c07 = L.map(
+                "map_f8f49e2e0b4baca3bd5586a6c0346c07",
+                {
+                    center: [-17.374181757691392, -66.15499723175712],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_28102a5129a0a617e81b72d4a5082666 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_28102a5129a0a617e81b72d4a5082666.addTo(map_f8f49e2e0b4baca3bd5586a6c0346c07);
+        
+    
+            var tile_layer_5b4666a8d4de610a5220dd0061444f6d = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detect_retina": false, "max_native_zoom": 19, "max_zoom": 19, "min_zoom": 0, "no_wrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+            var mini_map_5177b51591c97d7506a94d91d29c2746 = new L.Control.MiniMap(
+                tile_layer_5b4666a8d4de610a5220dd0061444f6d,
+                {
+  "position": "bottomright",
+  "width": 150,
+  "height": 150,
+  "collapsedWidth": 25,
+  "collapsedHeight": 25,
+  "zoomLevelOffset": -5,
+  "centerFixed": false,
+  "zoomAnimation": false,
+  "toggleDisplay": true,
+  "autoToggleDisplay": false,
+  "minimized": false,
+}
+            );
+            map_f8f49e2e0b4baca3bd5586a6c0346c07.addControl(mini_map_5177b51591c97d7506a94d91d29c2746);
+        
+    
+            var feature_group_8d3d3e3cd9984f96c74094b7af7d8a15 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_848e4941229670cf70d2ee2196296def = L.marker(
+                [-17.3747800534222, -66.141899035534],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_70fde21ff3ad113e66c0a8e4f3706d0d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_242d2acd7261412ad74866047e2e888b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1e9a7a1b3cd5e13b346af6b5fcd07378 = $(`<div id="html_1e9a7a1b3cd5e13b346af6b5fcd07378" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">El Pueblito</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Atractivos Turísticos</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:green;">                 ✔ Sí             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.374780, -66.141899         </p>     </div>     </div>`)[0];
+                popup_242d2acd7261412ad74866047e2e888b.setContent(html_1e9a7a1b3cd5e13b346af6b5fcd07378);
+            
+        
+
+        marker_848e4941229670cf70d2ee2196296def.bindPopup(popup_242d2acd7261412ad74866047e2e888b)
+        ;
+
+        
+    
+    
+            marker_848e4941229670cf70d2ee2196296def.bindTooltip(
+                `<div>
+                     El Pueblito
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_848e4941229670cf70d2ee2196296def.setIcon(icon_70fde21ff3ad113e66c0a8e4f3706d0d);
+            
+    
+            var marker_761c926196f3b19536ecb64d10d5d3a3 = L.marker(
+                [-17.3784957828421, -66.150407678886],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_91383803a6f7b99211704a6b1288bd76 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3ef50e39f532443603403cba549f6a53 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_cdf3f300f16def6826b4f73aa7e52c91 = $(`<div id="html_cdf3f300f16def6826b4f73aa7e52c91" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Pasaje Recoleta</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Plazas y Plazuelas</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:green;">                 ✔ Sí             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.378496, -66.150408         </p>     </div>     </div>`)[0];
+                popup_3ef50e39f532443603403cba549f6a53.setContent(html_cdf3f300f16def6826b4f73aa7e52c91);
+            
+        
+
+        marker_761c926196f3b19536ecb64d10d5d3a3.bindPopup(popup_3ef50e39f532443603403cba549f6a53)
+        ;
+
+        
+    
+    
+            marker_761c926196f3b19536ecb64d10d5d3a3.bindTooltip(
+                `<div>
+                     Pasaje Recoleta
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_761c926196f3b19536ecb64d10d5d3a3.setIcon(icon_91383803a6f7b99211704a6b1288bd76);
+            
+    
+            var marker_56967dca23cda71f5c3f1a29d018e887 = L.marker(
+                [-17.3674500673389, -66.1604597029751],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_a148e729dd5c0798b5a995efd776ac01 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2e65ee23ddbfc0121aa58460c020fd91 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e2a8a9d6388d8233db7160a4d3175af7 = $(`<div id="html_e2a8a9d6388d8233db7160a4d3175af7" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Plaza Hernando Siles</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Plazas y Plazuelas</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.367450, -66.160460         </p>     </div>     </div>`)[0];
+                popup_2e65ee23ddbfc0121aa58460c020fd91.setContent(html_e2a8a9d6388d8233db7160a4d3175af7);
+            
+        
+
+        marker_56967dca23cda71f5c3f1a29d018e887.bindPopup(popup_2e65ee23ddbfc0121aa58460c020fd91)
+        ;
+
+        
+    
+    
+            marker_56967dca23cda71f5c3f1a29d018e887.bindTooltip(
+                `<div>
+                     Plaza Hernando Siles
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_56967dca23cda71f5c3f1a29d018e887.setIcon(icon_a148e729dd5c0798b5a995efd776ac01);
+            
+    
+            var marker_0f280ff240c3aff4b4a97620dd930154 = L.marker(
+                [-17.372818761171, -66.1568224107423],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_7b7fcc3a411b8373e0e7fa027597a19d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bcfdf4c0c8e3bae5c6978d42a6678c4c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_cf385daa2925fbf7ac7fa8304a03024f = $(`<div id="html_cf385daa2925fbf7ac7fa8304a03024f" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Plaza 4 de noviembre</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Plazas y Plazuelas</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.372819, -66.156822         </p>     </div>     </div>`)[0];
+                popup_bcfdf4c0c8e3bae5c6978d42a6678c4c.setContent(html_cf385daa2925fbf7ac7fa8304a03024f);
+            
+        
+
+        marker_0f280ff240c3aff4b4a97620dd930154.bindPopup(popup_bcfdf4c0c8e3bae5c6978d42a6678c4c)
+        ;
+
+        
+    
+    
+            marker_0f280ff240c3aff4b4a97620dd930154.bindTooltip(
+                `<div>
+                     Plaza 4 de noviembre
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0f280ff240c3aff4b4a97620dd930154.setIcon(icon_7b7fcc3a411b8373e0e7fa027597a19d);
+            
+    
+            var marker_6095d07a693aa3950bb5d0eeda935d03 = L.marker(
+                [-17.370160943765, -66.1589953717927],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_e7a24b3e1ad74b62ebbb1d6b4926c87f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "tree-conifer",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0e422f66fbdb819ffe2bf3910443a46b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f25b34d5bedf1f305057ae4270cace6f = $(`<div id="html_f25b34d5bedf1f305057ae4270cace6f" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Parque Marcelo Illanes Ledezma</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Parques</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.370161, -66.158995         </p>     </div>     </div>`)[0];
+                popup_0e422f66fbdb819ffe2bf3910443a46b.setContent(html_f25b34d5bedf1f305057ae4270cace6f);
+            
+        
+
+        marker_6095d07a693aa3950bb5d0eeda935d03.bindPopup(popup_0e422f66fbdb819ffe2bf3910443a46b)
+        ;
+
+        
+    
+    
+            marker_6095d07a693aa3950bb5d0eeda935d03.bindTooltip(
+                `<div>
+                     Parque Marcelo Illanes Ledezma
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6095d07a693aa3950bb5d0eeda935d03.setIcon(icon_e7a24b3e1ad74b62ebbb1d6b4926c87f);
+            
+    
+            var marker_81d39f6b57ae8a899e7885ebf0e29c11 = L.marker(
+                [-17.3706217522155, -66.1525051663516],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_f61b02082cad1b702161ecbfe900e2b8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "tree-conifer",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0337bbf4a1491f64a52ad937fa762cc5 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a653d2282b36cc4d0db1ace4aa9f4b41 = $(`<div id="html_a653d2282b36cc4d0db1ace4aa9f4b41" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Parque Fidel Anze</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Parques</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.370622, -66.152505         </p>     </div>     </div>`)[0];
+                popup_0337bbf4a1491f64a52ad937fa762cc5.setContent(html_a653d2282b36cc4d0db1ace4aa9f4b41);
+            
+        
+
+        marker_81d39f6b57ae8a899e7885ebf0e29c11.bindPopup(popup_0337bbf4a1491f64a52ad937fa762cc5)
+        ;
+
+        
+    
+    
+            marker_81d39f6b57ae8a899e7885ebf0e29c11.bindTooltip(
+                `<div>
+                     Parque Fidel Anze
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_81d39f6b57ae8a899e7885ebf0e29c11.setIcon(icon_f61b02082cad1b702161ecbfe900e2b8);
+            
+    
+            var marker_7f3a002801fa35f3e87184b869fe1594 = L.marker(
+                [-17.3699571403266, -66.1590071299638],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_e63c57e45c1eba7775bfc89d1429112b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_00ee588f104494ecdd594ac0fa927543 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ccd5a04479341558b689756aeb828a1f = $(`<div id="html_ccd5a04479341558b689756aeb828a1f" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Av. Gualberto Villarroel</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Area verde</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.369957, -66.159007         </p>     </div>     </div>`)[0];
+                popup_00ee588f104494ecdd594ac0fa927543.setContent(html_ccd5a04479341558b689756aeb828a1f);
+            
+        
+
+        marker_7f3a002801fa35f3e87184b869fe1594.bindPopup(popup_00ee588f104494ecdd594ac0fa927543)
+        ;
+
+        
+    
+    
+            marker_7f3a002801fa35f3e87184b869fe1594.bindTooltip(
+                `<div>
+                     Av. Gualberto Villarroel
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7f3a002801fa35f3e87184b869fe1594.setIcon(icon_e63c57e45c1eba7775bfc89d1429112b);
+            
+    
+            var marker_05081947eba7655234459690c3a11bec = L.marker(
+                [-17.3688369115188, -66.1589722699153],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_e8cd76b7bed21f49820b7db9e34293c0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6418ff5205cdda5211e213b7457ae3c5 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9305cc38e53bf2658f5aa81da2c9389e = $(`<div id="html_9305cc38e53bf2658f5aa81da2c9389e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Pasarela Ciclovia</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Atractivos Turísticos</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.368837, -66.158972         </p>     </div>     </div>`)[0];
+                popup_6418ff5205cdda5211e213b7457ae3c5.setContent(html_9305cc38e53bf2658f5aa81da2c9389e);
+            
+        
+
+        marker_05081947eba7655234459690c3a11bec.bindPopup(popup_6418ff5205cdda5211e213b7457ae3c5)
+        ;
+
+        
+    
+    
+            marker_05081947eba7655234459690c3a11bec.bindTooltip(
+                `<div>
+                     Pasarela Ciclovia
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_05081947eba7655234459690c3a11bec.setIcon(icon_e8cd76b7bed21f49820b7db9e34293c0);
+            
+    
+            var marker_96bad1cdef4461e408b531d600fdb075 = L.marker(
+                [-17.3738113385915, -66.1535887788119],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_8ec182ae3eb3f1e9c40924680cb42c81 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "education",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e5783a8cb609b60bc414c82260267457 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_78535a8fe85ed33dddb42de711f8525f = $(`<div id="html_78535a8fe85ed33dddb42de711f8525f" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Museo de Historia Natural "Alcide d'Arguedas"</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Espacios Culturales</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.373811, -66.153589         </p>     </div>     </div>`)[0];
+                popup_e5783a8cb609b60bc414c82260267457.setContent(html_78535a8fe85ed33dddb42de711f8525f);
+            
+        
+
+        marker_96bad1cdef4461e408b531d600fdb075.bindPopup(popup_e5783a8cb609b60bc414c82260267457)
+        ;
+
+        
+    
+    
+            marker_96bad1cdef4461e408b531d600fdb075.bindTooltip(
+                `<div>
+                     Museo de Historia Natural "Alcide d'Arguedas"
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_96bad1cdef4461e408b531d600fdb075.setIcon(icon_8ec182ae3eb3f1e9c40924680cb42c81);
+            
+    
+            var marker_1e79b76423ecc8e23879e225852b01ee = L.marker(
+                [-17.3746816815581, -66.1529986928246],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_2e2eeaaaf480a1b3095c760fc38a4ea1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "education",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3f06acf32029c6a356d55f66eba035fa = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7494581b257438bf0ba54f7a8b998a4f = $(`<div id="html_7494581b257438bf0ba54f7a8b998a4f" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Centro Cultural "Simón I. Patiño"</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Espacios Culturales</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.374682, -66.152999         </p>     </div>     </div>`)[0];
+                popup_3f06acf32029c6a356d55f66eba035fa.setContent(html_7494581b257438bf0ba54f7a8b998a4f);
+            
+        
+
+        marker_1e79b76423ecc8e23879e225852b01ee.bindPopup(popup_3f06acf32029c6a356d55f66eba035fa)
+        ;
+
+        
+    
+    
+            marker_1e79b76423ecc8e23879e225852b01ee.bindTooltip(
+                `<div>
+                     Centro Cultural "Simón I. Patiño"
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1e79b76423ecc8e23879e225852b01ee.setIcon(icon_2e2eeaaaf480a1b3095c760fc38a4ea1);
+            
+    
+            var marker_320f9ca0689636bbe89b8dbe49bdfb57 = L.marker(
+                [-17.3753421155119, -66.1513089011289],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_bb8713903dd5f977720c3caea935da9a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f30a6d560a218fd262a77a522c380725 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5bf66cc20e21c9060b5fdde1df2b4bce = $(`<div id="html_5bf66cc20e21c9060b5fdde1df2b4bce" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Paseo Portales</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Atractivos Turísticos</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.375342, -66.151309         </p>     </div>     </div>`)[0];
+                popup_f30a6d560a218fd262a77a522c380725.setContent(html_5bf66cc20e21c9060b5fdde1df2b4bce);
+            
+        
+
+        marker_320f9ca0689636bbe89b8dbe49bdfb57.bindPopup(popup_f30a6d560a218fd262a77a522c380725)
+        ;
+
+        
+    
+    
+            marker_320f9ca0689636bbe89b8dbe49bdfb57.bindTooltip(
+                `<div>
+                     Paseo Portales
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_320f9ca0689636bbe89b8dbe49bdfb57.setIcon(icon_bb8713903dd5f977720c3caea935da9a);
+            
+    
+            var marker_8bfae39a30abf2e27676c94d6f5d8d5f = L.marker(
+                [-17.3747789549351, -66.1595432828627],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_cd3bc1ccbed53cafce05856288b5c7f6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "tree-conifer",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_51a828da9a25bbc5cd3f28a39033e273 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_6a30a51eaa4593f3374809d684b613d0 = $(`<div id="html_6a30a51eaa4593f3374809d684b613d0" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Parque Queru Queru</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Parques</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.374779, -66.159543         </p>     </div>     </div>`)[0];
+                popup_51a828da9a25bbc5cd3f28a39033e273.setContent(html_6a30a51eaa4593f3374809d684b613d0);
+            
+        
+
+        marker_8bfae39a30abf2e27676c94d6f5d8d5f.bindPopup(popup_51a828da9a25bbc5cd3f28a39033e273)
+        ;
+
+        
+    
+    
+            marker_8bfae39a30abf2e27676c94d6f5d8d5f.bindTooltip(
+                `<div>
+                     Parque Queru Queru
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8bfae39a30abf2e27676c94d6f5d8d5f.setIcon(icon_cd3bc1ccbed53cafce05856288b5c7f6);
+            
+    
+            var marker_13f8dc2a1e45754eab7f4047dd2f9b61 = L.marker(
+                [-17.3783114791126, -66.1520760129269],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_e56f33c9e7edd63ac89feb8fb86f5358 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_411fc3b62ba189130a11f7d21a83e867 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a5450d2cbe8599603964c8d7aef132c4 = $(`<div id="html_a5450d2cbe8599603964c8d7aef132c4" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Plaza Ubaldo Anze (Recoleta)</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Plazas y Plazuelas</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.378311, -66.152076         </p>     </div>     </div>`)[0];
+                popup_411fc3b62ba189130a11f7d21a83e867.setContent(html_a5450d2cbe8599603964c8d7aef132c4);
+            
+        
+
+        marker_13f8dc2a1e45754eab7f4047dd2f9b61.bindPopup(popup_411fc3b62ba189130a11f7d21a83e867)
+        ;
+
+        
+    
+    
+            marker_13f8dc2a1e45754eab7f4047dd2f9b61.bindTooltip(
+                `<div>
+                     Plaza Ubaldo Anze (Recoleta)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_13f8dc2a1e45754eab7f4047dd2f9b61.setIcon(icon_e56f33c9e7edd63ac89feb8fb86f5358);
+            
+    
+            var marker_c78758d8147689399b50a0834472e4f3 = L.marker(
+                [-17.3806510989092, -66.1588620017446],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_c70f4f91b9da1729dd4e37a42221c4e7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "tree-conifer",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1af82c0196dbfd03417f3bcdad77859f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4eb95ae192784ec1d009b7231dc8e136 = $(`<div id="html_4eb95ae192784ec1d009b7231dc8e136" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Parque Oblitas</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Parques</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.380651, -66.158862         </p>     </div>     </div>`)[0];
+                popup_1af82c0196dbfd03417f3bcdad77859f.setContent(html_4eb95ae192784ec1d009b7231dc8e136);
+            
+        
+
+        marker_c78758d8147689399b50a0834472e4f3.bindPopup(popup_1af82c0196dbfd03417f3bcdad77859f)
+        ;
+
+        
+    
+    
+            marker_c78758d8147689399b50a0834472e4f3.bindTooltip(
+                `<div>
+                     Parque Oblitas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c78758d8147689399b50a0834472e4f3.setIcon(icon_c70f4f91b9da1729dd4e37a42221c4e7);
+            
+    
+            var marker_69992417e5a4209a55c9d5f602b0463a = L.marker(
+                [-17.3807842054862, -66.160246021593],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_9c114afb8a01f49de08dbf250dca241e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_55561b73f543bef7903aa25020a0943f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_aab7573ea23d88aa6e9abad118a97280 = $(`<div id="html_aab7573ea23d88aa6e9abad118a97280" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Plaza de las Banderas</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Plazas y Plazuelas</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.380784, -66.160246         </p>     </div>     </div>`)[0];
+                popup_55561b73f543bef7903aa25020a0943f.setContent(html_aab7573ea23d88aa6e9abad118a97280);
+            
+        
+
+        marker_69992417e5a4209a55c9d5f602b0463a.bindPopup(popup_55561b73f543bef7903aa25020a0943f)
+        ;
+
+        
+    
+    
+            marker_69992417e5a4209a55c9d5f602b0463a.bindTooltip(
+                `<div>
+                     Plaza de las Banderas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_69992417e5a4209a55c9d5f602b0463a.setIcon(icon_9c114afb8a01f49de08dbf250dca241e);
+            
+    
+            var marker_2e98e5c3075816d12c2f63d25142899e = L.marker(
+                [-17.3754258363576, -66.1522632500607],
+                {
+}
+            ).addTo(feature_group_8d3d3e3cd9984f96c74094b7af7d8a15);
+        
+    
+            var icon_ce8252054e2c7a0c80b6068132542b1c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ebcdb5f21bd901e91b34a31f63757fea = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1961b8d1f08f5c1947409efe7da83e22 = $(`<div id="html_1961b8d1f08f5c1947409efe7da83e22" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 220px;">         <h4 style="margin:0 0 6px; color:#1F4E79;">Plaza Portales</h4>         <hr style="margin:4px 0; border-color:#ddd;">         <p style="margin:4px 0;"><b>Tipo:</b> Plazas y Plazuelas</p>         <p style="margin:4px 0;"><b>WiFi municipal:</b>             <span style="color:red;">                 ✘ No             </span>         </p>         <p style="margin:4px 0; color:#888; font-size:11px;">             -17.375426, -66.152263         </p>     </div>     </div>`)[0];
+                popup_ebcdb5f21bd901e91b34a31f63757fea.setContent(html_1961b8d1f08f5c1947409efe7da83e22);
+            
+        
+
+        marker_2e98e5c3075816d12c2f63d25142899e.bindPopup(popup_ebcdb5f21bd901e91b34a31f63757fea)
+        ;
+
+        
+    
+    
+            marker_2e98e5c3075816d12c2f63d25142899e.bindTooltip(
+                `<div>
+                     Plaza Portales
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2e98e5c3075816d12c2f63d25142899e.setIcon(icon_ce8252054e2c7a0c80b6068132542b1c);
+            
+    
+            feature_group_8d3d3e3cd9984f96c74094b7af7d8a15.addTo(map_f8f49e2e0b4baca3bd5586a6c0346c07);
+        
+    
+            var feature_group_52e370311d84e9b3d85f7d89c3423feb = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_ac0a22e99c05b14f65569a762ff81514 = L.circleMarker(
+                [-17.3747800534222, -66.141899035534],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14, "stroke": true, "weight": 3}
+            ).addTo(feature_group_52e370311d84e9b3d85f7d89c3423feb);
+        
+    
+            circle_marker_ac0a22e99c05b14f65569a762ff81514.bindTooltip(
+                `<div>
+                     📶 El Pueblito
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cb7811380730d1f1d55f4e221eb8b3df = L.circleMarker(
+                [-17.3784957828421, -66.150407678886],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.25, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14, "stroke": true, "weight": 3}
+            ).addTo(feature_group_52e370311d84e9b3d85f7d89c3423feb);
+        
+    
+            circle_marker_cb7811380730d1f1d55f4e221eb8b3df.bindTooltip(
+                `<div>
+                     📶 Pasaje Recoleta
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_52e370311d84e9b3d85f7d89c3423feb.addTo(map_f8f49e2e0b4baca3bd5586a6c0346c07);
+        
+    
+            var feature_group_6f13c6cf19a92843c73fb6de2391f7f0 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_f5eb3a841f225ab1e3f08e65692b6390 = L.circleMarker(
+                [-17.3674500673389, -66.1604597029751],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_f5eb3a841f225ab1e3f08e65692b6390.bindTooltip(
+                `<div>
+                     ❌ Plaza Hernando Siles
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e82eb507330aa9fe831510b0b6f5d84e = L.circleMarker(
+                [-17.372818761171, -66.1568224107423],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_e82eb507330aa9fe831510b0b6f5d84e.bindTooltip(
+                `<div>
+                     ❌ Plaza 4 de noviembre
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7b1f5de74b1d85392d316a4a6815b28f = L.circleMarker(
+                [-17.370160943765, -66.1589953717927],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_7b1f5de74b1d85392d316a4a6815b28f.bindTooltip(
+                `<div>
+                     ❌ Parque Marcelo Illanes Ledezma
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_abf7e54157172f0ac93c56291ca4d654 = L.circleMarker(
+                [-17.3706217522155, -66.1525051663516],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_abf7e54157172f0ac93c56291ca4d654.bindTooltip(
+                `<div>
+                     ❌ Parque Fidel Anze
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_64a1be29006c0f2421fe22c39aa4d41d = L.circleMarker(
+                [-17.3699571403266, -66.1590071299638],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_64a1be29006c0f2421fe22c39aa4d41d.bindTooltip(
+                `<div>
+                     ❌ Av. Gualberto Villarroel
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a6a3acd3f61892320e4b90cd739affbe = L.circleMarker(
+                [-17.3688369115188, -66.1589722699153],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_a6a3acd3f61892320e4b90cd739affbe.bindTooltip(
+                `<div>
+                     ❌ Pasarela Ciclovia
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0fe9278cb03bcded45790cffb1a8af26 = L.circleMarker(
+                [-17.3738113385915, -66.1535887788119],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_0fe9278cb03bcded45790cffb1a8af26.bindTooltip(
+                `<div>
+                     ❌ Museo de Historia Natural "Alcide d'Arguedas"
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_37261a5affa4e97c36e72373826c4efb = L.circleMarker(
+                [-17.3746816815581, -66.1529986928246],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_37261a5affa4e97c36e72373826c4efb.bindTooltip(
+                `<div>
+                     ❌ Centro Cultural "Simón I. Patiño"
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c17ea9173e7900444faa7ea2111c2217 = L.circleMarker(
+                [-17.3753421155119, -66.1513089011289],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_c17ea9173e7900444faa7ea2111c2217.bindTooltip(
+                `<div>
+                     ❌ Paseo Portales
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7325524adff70d13220e3e614f30d4aa = L.circleMarker(
+                [-17.3747789549351, -66.1595432828627],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_7325524adff70d13220e3e614f30d4aa.bindTooltip(
+                `<div>
+                     ❌ Parque Queru Queru
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d4bbae066c9854e8a955a25d8b8362ce = L.circleMarker(
+                [-17.3783114791126, -66.1520760129269],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_d4bbae066c9854e8a955a25d8b8362ce.bindTooltip(
+                `<div>
+                     ❌ Plaza Ubaldo Anze (Recoleta)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_45fe3d217c8feed0e9b2562540dd3116 = L.circleMarker(
+                [-17.3806510989092, -66.1588620017446],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_45fe3d217c8feed0e9b2562540dd3116.bindTooltip(
+                `<div>
+                     ❌ Parque Oblitas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c781075aaa422392a6b52d7bb943064c = L.circleMarker(
+                [-17.3807842054862, -66.160246021593],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_c781075aaa422392a6b52d7bb943064c.bindTooltip(
+                `<div>
+                     ❌ Plaza de las Banderas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6a1c74098b2faad107a991e28463f442 = L.circleMarker(
+                [-17.3754258363576, -66.1522632500607],
+                {"bubblingMouseEvents": true, "color": "#cc0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(feature_group_6f13c6cf19a92843c73fb6de2391f7f0);
+        
+    
+            circle_marker_6a1c74098b2faad107a991e28463f442.bindTooltip(
+                `<div>
+                     ❌ Plaza Portales
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_6f13c6cf19a92843c73fb6de2391f7f0.addTo(map_f8f49e2e0b4baca3bd5586a6c0346c07);
+        
+    
+            var layer_control_b2595747a0b5a26f4c8c679b792d527e_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_28102a5129a0a617e81b72d4a5082666,
+                },
+                overlays :  {
+                    "\ud83c\udfdb\ufe0f Infraestructura p\u00fablica" : feature_group_8d3d3e3cd9984f96c74094b7af7d8a15,
+                    "\ud83d\udcf6 Con WiFi municipal" : feature_group_52e370311d84e9b3d85f7d89c3423feb,
+                    "\u274c Sin WiFi municipal" : feature_group_6f13c6cf19a92843c73fb6de2391f7f0,
+                },
+            };
+            let layer_control_b2595747a0b5a26f4c8c679b792d527e = L.control.layers(
+                layer_control_b2595747a0b5a26f4c8c679b792d527e_layers.base_layers,
+                layer_control_b2595747a0b5a26f4c8c679b792d527e_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_f8f49e2e0b4baca3bd5586a6c0346c07);
+
+        
+    
+            tile_layer_28102a5129a0a617e81b72d4a5082666.addTo(map_f8f49e2e0b4baca3bd5586a6c0346c07);
+        
+    
+                marker_848e4941229670cf70d2ee2196296def.setIcon(icon_70fde21ff3ad113e66c0a8e4f3706d0d);
+            
+    
+                marker_761c926196f3b19536ecb64d10d5d3a3.setIcon(icon_91383803a6f7b99211704a6b1288bd76);
+            
+    
+                marker_56967dca23cda71f5c3f1a29d018e887.setIcon(icon_a148e729dd5c0798b5a995efd776ac01);
+            
+    
+                marker_0f280ff240c3aff4b4a97620dd930154.setIcon(icon_7b7fcc3a411b8373e0e7fa027597a19d);
+            
+    
+                marker_6095d07a693aa3950bb5d0eeda935d03.setIcon(icon_e7a24b3e1ad74b62ebbb1d6b4926c87f);
+            
+    
+                marker_81d39f6b57ae8a899e7885ebf0e29c11.setIcon(icon_f61b02082cad1b702161ecbfe900e2b8);
+            
+    
+                marker_7f3a002801fa35f3e87184b869fe1594.setIcon(icon_e63c57e45c1eba7775bfc89d1429112b);
+            
+    
+                marker_05081947eba7655234459690c3a11bec.setIcon(icon_e8cd76b7bed21f49820b7db9e34293c0);
+            
+    
+                marker_96bad1cdef4461e408b531d600fdb075.setIcon(icon_8ec182ae3eb3f1e9c40924680cb42c81);
+            
+    
+                marker_1e79b76423ecc8e23879e225852b01ee.setIcon(icon_2e2eeaaaf480a1b3095c760fc38a4ea1);
+            
+    
+                marker_320f9ca0689636bbe89b8dbe49bdfb57.setIcon(icon_bb8713903dd5f977720c3caea935da9a);
+            
+    
+                marker_8bfae39a30abf2e27676c94d6f5d8d5f.setIcon(icon_cd3bc1ccbed53cafce05856288b5c7f6);
+            
+    
+                marker_13f8dc2a1e45754eab7f4047dd2f9b61.setIcon(icon_e56f33c9e7edd63ac89feb8fb86f5358);
+            
+    
+                marker_c78758d8147689399b50a0834472e4f3.setIcon(icon_c70f4f91b9da1729dd4e37a42221c4e7);
+            
+    
+                marker_69992417e5a4209a55c9d5f602b0463a.setIcon(icon_9c114afb8a01f49de08dbf250dca241e);
+            
+    
+                marker_2e98e5c3075816d12c2f63d25142899e.setIcon(icon_ce8252054e2c7a0c80b6068132542b1c);
+            
+    
+            feature_group_8d3d3e3cd9984f96c74094b7af7d8a15.addTo(map_f8f49e2e0b4baca3bd5586a6c0346c07);
+        
+    
+            feature_group_52e370311d84e9b3d85f7d89c3423feb.addTo(map_f8f49e2e0b4baca3bd5586a6c0346c07);
+        
+    
+            feature_group_6f13c6cf19a92843c73fb6de2391f7f0.addTo(map_f8f49e2e0b4baca3bd5586a6c0346c07);
+        
+</script>
+</html>
