@@ -270,7 +270,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mapPIE1 = L.map('map-pie1').setView([-17.3750, -66.1560], 15); 
 	setTimeout(function(){ 
-	mapPIE1.invalidateSize(); }, 300);
+	document.getElementById('map-
+	pie1').style.height = '500px';	
+	mapPIE1.invalidateSize(); }, 400);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '© <a href="https://carto.com">CARTO</a> · © <a href="https://openstreetmap.org">OpenStreetMap</a>',
       maxZoom: 19,
