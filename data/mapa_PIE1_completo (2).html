@@ -1,0 +1,4035 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_00fa73fc024b4c6e3a48cb8925e7b5e9 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+</head>
+<body>
+    
+    
+<div style="position:fixed;top:12px;left:55px;z-index:1000;background:white;
+    padding:10px 16px;border-radius:8px;border-left:5px solid #1F4E79;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);font-family:Arial,sans-serif;">
+    <p style="margin:0;font-size:15px;font-weight:bold;color:#1F4E79;">
+        Polígono de Innovación Económica 1</p>
+    <p style="margin:2px 0 0;font-size:12px;color:#555;">
+        Infraestructura pública + Actividades económicas · GAMC–UNIFRANZ</p>
+</div>
+    
+<div style="position:fixed;top:12px;right:12px;z-index:1000;background:white;
+    padding:12px 16px;border-radius:8px;border-left:5px solid #1F4E79;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);font-family:Arial,sans-serif;
+    font-size:12px;line-height:1.9;">
+    <p style="margin:0 0 4px;font-weight:bold;color:#1F4E79;">Resumen PIE-1</p>
+    <p style="margin:0;">🏛️ Infraestructura: <b>16</b> &nbsp;|&nbsp; 📶 WiFi: <b>2</b></p>
+    <hr style="margin:5px 0;border-color:#eee;">
+    <p style="margin:0 0 3px;font-weight:bold;">🏪 Actividades: <b>58</b></p>
+    <p style='margin:0;'>🍽️ Gastronomía: <b>43</b></p><p style='margin:0;'>🏨 Hospedaje: <b>4</b></p><p style='margin:0;'>🎭 Ocio: <b>4</b></p><p style='margin:0;'>🏥 Salud: <b>6</b></p><p style='margin:0;'>🎓 Universidad: <b>1</b></p>
+</div>
+    
+<div style="position:fixed;bottom:40px;left:12px;z-index:1000;background:white;
+    padding:12px 16px;border-radius:8px;border-left:5px solid #1F6B5A;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);font-family:Arial,sans-serif;
+    font-size:12px;line-height:1.9;">
+    <p style="margin:0 0 5px;font-weight:bold;color:#1F4E79;">Leyenda</p>
+    <p style="margin:0 0 2px;font-weight:bold;color:#555;font-size:11px;">INFRAESTRUCTURA</p>
+    <p style="margin:0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;
+        background:green;margin-right:5px;vertical-align:middle;"></span>Con WiFi municipal</p>
+    <p style="margin:0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;
+        background:red;margin-right:5px;vertical-align:middle;"></span>Sin WiFi municipal</p>
+    <hr style="margin:6px 0;border-color:#eee;">
+    <p style="margin:0 0 2px;font-weight:bold;color:#555;font-size:11px;">ACTIVIDADES ECONÓMICAS</p>
+    <p style='margin:0;'><span style='display:inline-block;width:12px;height:12px;border-radius:50%;background:#E65100;margin-right:5px;vertical-align:middle;'></span>🍽️ Gastronomía</p><p style='margin:0;'><span style='display:inline-block;width:12px;height:12px;border-radius:50%;background:#6A1B9A;margin-right:5px;vertical-align:middle;'></span>🏨 Hospedaje</p><p style='margin:0;'><span style='display:inline-block;width:12px;height:12px;border-radius:50%;background:#C2185B;margin-right:5px;vertical-align:middle;'></span>🎭 Ocio</p><p style='margin:0;'><span style='display:inline-block;width:12px;height:12px;border-radius:50%;background:#B71C1C;margin-right:5px;vertical-align:middle;'></span>🏥 Salud</p><p style='margin:0;'><span style='display:inline-block;width:12px;height:12px;border-radius:50%;background:#1A237E;margin-right:5px;vertical-align:middle;'></span>🎓 Universidad</p>
+</div>
+    
+            <div class="folium-map" id="map_00fa73fc024b4c6e3a48cb8925e7b5e9" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_00fa73fc024b4c6e3a48cb8925e7b5e9 = L.map(
+                "map_00fa73fc024b4c6e3a48cb8925e7b5e9",
+                {
+                    center: [-17.375, -66.156],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_8dc32cd226dfee8ea95f511bbfcb418a = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_8dc32cd226dfee8ea95f511bbfcb418a.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+    
+            var tile_layer_c981108f868228b60046fcb6a39b51a1 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detect_retina": false, "max_native_zoom": 19, "max_zoom": 19, "min_zoom": 0, "no_wrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+            var mini_map_d229be76c40305ec6dff5af28dd5e14f = new L.Control.MiniMap(
+                tile_layer_c981108f868228b60046fcb6a39b51a1,
+                {
+  "position": "bottomright",
+  "width": 150,
+  "height": 150,
+  "collapsedWidth": 25,
+  "collapsedHeight": 25,
+  "zoomLevelOffset": -5,
+  "centerFixed": false,
+  "zoomAnimation": false,
+  "toggleDisplay": true,
+  "autoToggleDisplay": false,
+  "minimized": false,
+}
+            );
+            map_00fa73fc024b4c6e3a48cb8925e7b5e9.addControl(mini_map_d229be76c40305ec6dff5af28dd5e14f);
+        
+    
+            var feature_group_0dd7457f32f12d991ac91adf87141e85 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_67e171358f7c26260a5729cdcc202ca0 = L.marker(
+                [-17.3747800534222, -66.141899035534],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_0f24437be1d76a3b960e68646d3667f3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9e0301dafddd73c107ba3e848ca850d1 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_13533e7bec8589c9b5412fa53f0bb649 = $(`<div id="html_13533e7bec8589c9b5412fa53f0bb649" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">El Pueblito</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Atractivos Turísticos</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:green;">                 ✔ Sí             </span>         </p>     </div></div>`)[0];
+                popup_9e0301dafddd73c107ba3e848ca850d1.setContent(html_13533e7bec8589c9b5412fa53f0bb649);
+            
+        
+
+        marker_67e171358f7c26260a5729cdcc202ca0.bindPopup(popup_9e0301dafddd73c107ba3e848ca850d1)
+        ;
+
+        
+    
+    
+            marker_67e171358f7c26260a5729cdcc202ca0.bindTooltip(
+                `<div>
+                     🏛️ El Pueblito
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_67e171358f7c26260a5729cdcc202ca0.setIcon(icon_0f24437be1d76a3b960e68646d3667f3);
+            
+    
+            var marker_7333a6bf6416da57ac294aee077b70ee = L.marker(
+                [-17.3784957828421, -66.150407678886],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_a16af1122ab3ec096c605030ba4d8278 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_305e03f4fc85afee898c8695141bffe4 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_1c5d714800a8456ce220d30b027926e3 = $(`<div id="html_1c5d714800a8456ce220d30b027926e3" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Pasaje Recoleta</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Plazas y Plazuelas</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:green;">                 ✔ Sí             </span>         </p>     </div></div>`)[0];
+                popup_305e03f4fc85afee898c8695141bffe4.setContent(html_1c5d714800a8456ce220d30b027926e3);
+            
+        
+
+        marker_7333a6bf6416da57ac294aee077b70ee.bindPopup(popup_305e03f4fc85afee898c8695141bffe4)
+        ;
+
+        
+    
+    
+            marker_7333a6bf6416da57ac294aee077b70ee.bindTooltip(
+                `<div>
+                     🏛️ Pasaje Recoleta
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7333a6bf6416da57ac294aee077b70ee.setIcon(icon_a16af1122ab3ec096c605030ba4d8278);
+            
+    
+            var marker_b993ea5b550217337cdb557ce93b68ed = L.marker(
+                [-17.3674500673389, -66.1604597029751],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_4031769d2ff0b79719e08f342688a75c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_476b34607d84e360e306c63a92c82c99 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_ba2550a55705047a983c25f457dbab2f = $(`<div id="html_ba2550a55705047a983c25f457dbab2f" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Plaza Hernando Siles</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Plazas y Plazuelas</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_476b34607d84e360e306c63a92c82c99.setContent(html_ba2550a55705047a983c25f457dbab2f);
+            
+        
+
+        marker_b993ea5b550217337cdb557ce93b68ed.bindPopup(popup_476b34607d84e360e306c63a92c82c99)
+        ;
+
+        
+    
+    
+            marker_b993ea5b550217337cdb557ce93b68ed.bindTooltip(
+                `<div>
+                     🏛️ Plaza Hernando Siles
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b993ea5b550217337cdb557ce93b68ed.setIcon(icon_4031769d2ff0b79719e08f342688a75c);
+            
+    
+            var marker_eee229a5900993d5cfd9f638330ed92c = L.marker(
+                [-17.372818761171, -66.1568224107423],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_14a052b2abe608bdd72667805416a7c3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_035a938aec98b08b9a021a737e47421e = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_68c6e4f571ab62b50aa585dd5193ea62 = $(`<div id="html_68c6e4f571ab62b50aa585dd5193ea62" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Plaza 4 de noviembre</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Plazas y Plazuelas</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_035a938aec98b08b9a021a737e47421e.setContent(html_68c6e4f571ab62b50aa585dd5193ea62);
+            
+        
+
+        marker_eee229a5900993d5cfd9f638330ed92c.bindPopup(popup_035a938aec98b08b9a021a737e47421e)
+        ;
+
+        
+    
+    
+            marker_eee229a5900993d5cfd9f638330ed92c.bindTooltip(
+                `<div>
+                     🏛️ Plaza 4 de noviembre
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_eee229a5900993d5cfd9f638330ed92c.setIcon(icon_14a052b2abe608bdd72667805416a7c3);
+            
+    
+            var marker_3ed3758cbb4ed3d206015decbf6741d6 = L.marker(
+                [-17.370160943765, -66.1589953717927],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_e1bb4a5eb2dd0b464f9d6f21ac2014bb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "tree-conifer",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4470579ba2758c7fa900255cd03a1f9c = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_91417008947d1ca4bbaad8b476a2afb3 = $(`<div id="html_91417008947d1ca4bbaad8b476a2afb3" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Parque Marcelo Illanes Ledezma</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Parques</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_4470579ba2758c7fa900255cd03a1f9c.setContent(html_91417008947d1ca4bbaad8b476a2afb3);
+            
+        
+
+        marker_3ed3758cbb4ed3d206015decbf6741d6.bindPopup(popup_4470579ba2758c7fa900255cd03a1f9c)
+        ;
+
+        
+    
+    
+            marker_3ed3758cbb4ed3d206015decbf6741d6.bindTooltip(
+                `<div>
+                     🏛️ Parque Marcelo Illanes Ledezma
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3ed3758cbb4ed3d206015decbf6741d6.setIcon(icon_e1bb4a5eb2dd0b464f9d6f21ac2014bb);
+            
+    
+            var marker_62fe61aec5868d32402d9734f8b9c734 = L.marker(
+                [-17.3706217522155, -66.1525051663516],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_bad60c0cb849e82485774418fce0b700 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "tree-conifer",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3f8c0ad9b248ba5c822332d39ba61154 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_3dd26a322aac93a642be132bc32b577c = $(`<div id="html_3dd26a322aac93a642be132bc32b577c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Parque Fidel Anze</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Parques</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_3f8c0ad9b248ba5c822332d39ba61154.setContent(html_3dd26a322aac93a642be132bc32b577c);
+            
+        
+
+        marker_62fe61aec5868d32402d9734f8b9c734.bindPopup(popup_3f8c0ad9b248ba5c822332d39ba61154)
+        ;
+
+        
+    
+    
+            marker_62fe61aec5868d32402d9734f8b9c734.bindTooltip(
+                `<div>
+                     🏛️ Parque Fidel Anze
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_62fe61aec5868d32402d9734f8b9c734.setIcon(icon_bad60c0cb849e82485774418fce0b700);
+            
+    
+            var marker_09e1f9519b31f2d5a6bb81dd1ae16016 = L.marker(
+                [-17.3699571403266, -66.1590071299638],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_9f9c5dccdc8aa9866abe9b841e33a172 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_43aa47c3c3e1655baecad0d2c0addc7a = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_fa9a5c63bb7ccf6dae968ee839c3d1d2 = $(`<div id="html_fa9a5c63bb7ccf6dae968ee839c3d1d2" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Av. Gualberto Villarroel</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Area verde</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_43aa47c3c3e1655baecad0d2c0addc7a.setContent(html_fa9a5c63bb7ccf6dae968ee839c3d1d2);
+            
+        
+
+        marker_09e1f9519b31f2d5a6bb81dd1ae16016.bindPopup(popup_43aa47c3c3e1655baecad0d2c0addc7a)
+        ;
+
+        
+    
+    
+            marker_09e1f9519b31f2d5a6bb81dd1ae16016.bindTooltip(
+                `<div>
+                     🏛️ Av. Gualberto Villarroel
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_09e1f9519b31f2d5a6bb81dd1ae16016.setIcon(icon_9f9c5dccdc8aa9866abe9b841e33a172);
+            
+    
+            var marker_61cf16363cdd413a85a1a2b3a297f0d1 = L.marker(
+                [-17.3688369115188, -66.1589722699153],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_5088bcbca77d2fd6baaefff70577950e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9442b8404eb09d3ff174ed5420865f33 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_4eec4d67003d44e10421b8ff775c88ff = $(`<div id="html_4eec4d67003d44e10421b8ff775c88ff" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Pasarela Ciclovia</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Atractivos Turísticos</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_9442b8404eb09d3ff174ed5420865f33.setContent(html_4eec4d67003d44e10421b8ff775c88ff);
+            
+        
+
+        marker_61cf16363cdd413a85a1a2b3a297f0d1.bindPopup(popup_9442b8404eb09d3ff174ed5420865f33)
+        ;
+
+        
+    
+    
+            marker_61cf16363cdd413a85a1a2b3a297f0d1.bindTooltip(
+                `<div>
+                     🏛️ Pasarela Ciclovia
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_61cf16363cdd413a85a1a2b3a297f0d1.setIcon(icon_5088bcbca77d2fd6baaefff70577950e);
+            
+    
+            var marker_e71e1ae388b624761f9b79f13b24be62 = L.marker(
+                [-17.3738113385915, -66.1535887788119],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_136d7e764061fb6055b28b7edb96a398 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "education",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_61e50352b82c122394f42cb12deb4fa0 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_d09c1da46509250ccf05c11b2d8cf5ce = $(`<div id="html_d09c1da46509250ccf05c11b2d8cf5ce" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Museo de Historia Natural "Alcide d'Arguedas"</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Espacios Culturales</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_61e50352b82c122394f42cb12deb4fa0.setContent(html_d09c1da46509250ccf05c11b2d8cf5ce);
+            
+        
+
+        marker_e71e1ae388b624761f9b79f13b24be62.bindPopup(popup_61e50352b82c122394f42cb12deb4fa0)
+        ;
+
+        
+    
+    
+            marker_e71e1ae388b624761f9b79f13b24be62.bindTooltip(
+                `<div>
+                     🏛️ Museo de Historia Natural "Alcide d'Arguedas"
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e71e1ae388b624761f9b79f13b24be62.setIcon(icon_136d7e764061fb6055b28b7edb96a398);
+            
+    
+            var marker_80091741c9ef4ac0a879920f16e54b6c = L.marker(
+                [-17.3746816815581, -66.1529986928246],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_5c84a340732ee3c85f3c84c986f41839 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "education",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_85759f835e0bd301b4d65219616ee331 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_87278a54c6d5d9df2f3d2c021e4204fa = $(`<div id="html_87278a54c6d5d9df2f3d2c021e4204fa" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Centro Cultural "Simón I. Patiño"</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Espacios Culturales</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_85759f835e0bd301b4d65219616ee331.setContent(html_87278a54c6d5d9df2f3d2c021e4204fa);
+            
+        
+
+        marker_80091741c9ef4ac0a879920f16e54b6c.bindPopup(popup_85759f835e0bd301b4d65219616ee331)
+        ;
+
+        
+    
+    
+            marker_80091741c9ef4ac0a879920f16e54b6c.bindTooltip(
+                `<div>
+                     🏛️ Centro Cultural "Simón I. Patiño"
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_80091741c9ef4ac0a879920f16e54b6c.setIcon(icon_5c84a340732ee3c85f3c84c986f41839);
+            
+    
+            var marker_77e35c521900f9d0a7060f699d7eaf3f = L.marker(
+                [-17.3753421155119, -66.1513089011289],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_cde704aa9cea402974c8d4207eaa22b8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3d83573b00d48ad1f3542cd5fc58d70a = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_03fe2c7d4126133672621236cfb53025 = $(`<div id="html_03fe2c7d4126133672621236cfb53025" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Paseo Portales</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Atractivos Turísticos</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_3d83573b00d48ad1f3542cd5fc58d70a.setContent(html_03fe2c7d4126133672621236cfb53025);
+            
+        
+
+        marker_77e35c521900f9d0a7060f699d7eaf3f.bindPopup(popup_3d83573b00d48ad1f3542cd5fc58d70a)
+        ;
+
+        
+    
+    
+            marker_77e35c521900f9d0a7060f699d7eaf3f.bindTooltip(
+                `<div>
+                     🏛️ Paseo Portales
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_77e35c521900f9d0a7060f699d7eaf3f.setIcon(icon_cde704aa9cea402974c8d4207eaa22b8);
+            
+    
+            var marker_49398df53b67bae9ce4fc248297f64b7 = L.marker(
+                [-17.3747789549351, -66.1595432828627],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_5f20666eee3cbdb395b3820926eebc48 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "tree-conifer",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_948492dbb9f1a4f56de1114f1feb9074 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_da8f35f40b8c78b4ca73245b4263fc9c = $(`<div id="html_da8f35f40b8c78b4ca73245b4263fc9c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Parque Queru Queru</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Parques</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_948492dbb9f1a4f56de1114f1feb9074.setContent(html_da8f35f40b8c78b4ca73245b4263fc9c);
+            
+        
+
+        marker_49398df53b67bae9ce4fc248297f64b7.bindPopup(popup_948492dbb9f1a4f56de1114f1feb9074)
+        ;
+
+        
+    
+    
+            marker_49398df53b67bae9ce4fc248297f64b7.bindTooltip(
+                `<div>
+                     🏛️ Parque Queru Queru
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_49398df53b67bae9ce4fc248297f64b7.setIcon(icon_5f20666eee3cbdb395b3820926eebc48);
+            
+    
+            var marker_beffb79522d7e8f92de9151341ae8fb6 = L.marker(
+                [-17.3783114791126, -66.1520760129269],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_da090c1064da54598104e992f06f6e0a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2740f3f4a325a4e6066be9298b109c81 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_c3adfcb360f4c89b96809a12ab0b64cc = $(`<div id="html_c3adfcb360f4c89b96809a12ab0b64cc" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Plaza Ubaldo Anze (Recoleta)</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Plazas y Plazuelas</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_2740f3f4a325a4e6066be9298b109c81.setContent(html_c3adfcb360f4c89b96809a12ab0b64cc);
+            
+        
+
+        marker_beffb79522d7e8f92de9151341ae8fb6.bindPopup(popup_2740f3f4a325a4e6066be9298b109c81)
+        ;
+
+        
+    
+    
+            marker_beffb79522d7e8f92de9151341ae8fb6.bindTooltip(
+                `<div>
+                     🏛️ Plaza Ubaldo Anze (Recoleta)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_beffb79522d7e8f92de9151341ae8fb6.setIcon(icon_da090c1064da54598104e992f06f6e0a);
+            
+    
+            var marker_fdd0b083183c6a9dcaee466e64bf8652 = L.marker(
+                [-17.3806510989092, -66.1588620017446],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_a30ef5da690861742276ee98e7c352ae = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "tree-conifer",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_115e4aa3d9f2c7f1621f58ecf47c1c14 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_8237a7a09f6aae4a0ee4d7956832f9c8 = $(`<div id="html_8237a7a09f6aae4a0ee4d7956832f9c8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Parque Oblitas</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Parques</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_115e4aa3d9f2c7f1621f58ecf47c1c14.setContent(html_8237a7a09f6aae4a0ee4d7956832f9c8);
+            
+        
+
+        marker_fdd0b083183c6a9dcaee466e64bf8652.bindPopup(popup_115e4aa3d9f2c7f1621f58ecf47c1c14)
+        ;
+
+        
+    
+    
+            marker_fdd0b083183c6a9dcaee466e64bf8652.bindTooltip(
+                `<div>
+                     🏛️ Parque Oblitas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fdd0b083183c6a9dcaee466e64bf8652.setIcon(icon_a30ef5da690861742276ee98e7c352ae);
+            
+    
+            var marker_158068cb0691f7d1f6b5f41e4730f07f = L.marker(
+                [-17.3807842054862, -66.160246021593],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_226609a02f3668e1829cabc976b61981 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6a000d7c6b0c186e68e6b95b49197045 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_ab10d80cfff776e97e318c1d54658b78 = $(`<div id="html_ab10d80cfff776e97e318c1d54658b78" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Plaza de las Banderas</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Plazas y Plazuelas</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_6a000d7c6b0c186e68e6b95b49197045.setContent(html_ab10d80cfff776e97e318c1d54658b78);
+            
+        
+
+        marker_158068cb0691f7d1f6b5f41e4730f07f.bindPopup(popup_6a000d7c6b0c186e68e6b95b49197045)
+        ;
+
+        
+    
+    
+            marker_158068cb0691f7d1f6b5f41e4730f07f.bindTooltip(
+                `<div>
+                     🏛️ Plaza de las Banderas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_158068cb0691f7d1f6b5f41e4730f07f.setIcon(icon_226609a02f3668e1829cabc976b61981);
+            
+    
+            var marker_f1fe866a7740addf3e9b2fa0dc157a01 = L.marker(
+                [-17.3754258363576, -66.1522632500607],
+                {
+}
+            ).addTo(feature_group_0dd7457f32f12d991ac91adf87141e85);
+        
+    
+            var icon_ec1db636c01f2351d9b31d71a54338d8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_06ae8994aafef57985fe17d67a278f79 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_f37fc026d704e3ba1ae7433b5a67aca3 = $(`<div id="html_f37fc026d704e3ba1ae7433b5a67aca3" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:210px;">         <h4 style="margin:0 0 5px;color:#1F4E79;">Plaza Portales</h4>         <hr style="margin:3px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Tipo:</b> Plazas y Plazuelas</p>         <p style="margin:3px 0;"><b>WiFi:</b>             <span style="color:red;">                 ✘ No             </span>         </p>     </div></div>`)[0];
+                popup_06ae8994aafef57985fe17d67a278f79.setContent(html_f37fc026d704e3ba1ae7433b5a67aca3);
+            
+        
+
+        marker_f1fe866a7740addf3e9b2fa0dc157a01.bindPopup(popup_06ae8994aafef57985fe17d67a278f79)
+        ;
+
+        
+    
+    
+            marker_f1fe866a7740addf3e9b2fa0dc157a01.bindTooltip(
+                `<div>
+                     🏛️ Plaza Portales
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f1fe866a7740addf3e9b2fa0dc157a01.setIcon(icon_ec1db636c01f2351d9b31d71a54338d8);
+            
+    
+            feature_group_0dd7457f32f12d991ac91adf87141e85.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+    
+            var feature_group_d7da83b48f849ff315e18cab8b53f924 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_56c9717b916c947016da85c94ef00194 = L.marker(
+                [-17.3798461, -66.1593683],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_799770952dc3731cbd30b93c1bef2556 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b684454b686ef323f937fd74eba134d0 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_7b4ebc66349fc64375fbb1f2fdfa0cc6 = $(`<div id="html_7b4ebc66349fc64375fbb1f2fdfa0cc6" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Churrasqueria BAGU</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_b684454b686ef323f937fd74eba134d0.setContent(html_7b4ebc66349fc64375fbb1f2fdfa0cc6);
+            
+        
+
+        marker_56c9717b916c947016da85c94ef00194.bindPopup(popup_b684454b686ef323f937fd74eba134d0)
+        ;
+
+        
+    
+    
+            marker_56c9717b916c947016da85c94ef00194.bindTooltip(
+                `<div>
+                     🍽️ Churrasqueria BAGU
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_56c9717b916c947016da85c94ef00194.setIcon(icon_799770952dc3731cbd30b93c1bef2556);
+            
+    
+            var marker_96f5d4b9bd1500084940b613156d7a8d = L.marker(
+                [-17.3787714, -66.1592775],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_a4a4ad2c0c5430d4c59b6868c95ec005 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4d615ebf1ef05982363a353f7341af30 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_75c28825fed7dba3e495da93375bbb4b = $(`<div id="html_75c28825fed7dba3e495da93375bbb4b" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Chiken's kingdom</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT Cuenta con registro de SEPREC</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_4d615ebf1ef05982363a353f7341af30.setContent(html_75c28825fed7dba3e495da93375bbb4b);
+            
+        
+
+        marker_96f5d4b9bd1500084940b613156d7a8d.bindPopup(popup_4d615ebf1ef05982363a353f7341af30)
+        ;
+
+        
+    
+    
+            marker_96f5d4b9bd1500084940b613156d7a8d.bindTooltip(
+                `<div>
+                     🍽️ Chiken's kingdom
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_96f5d4b9bd1500084940b613156d7a8d.setIcon(icon_a4a4ad2c0c5430d4c59b6868c95ec005);
+            
+    
+            var marker_7cc941ab639de31f962f61fa8e4fa1ac = L.marker(
+                [-17.3776144, -66.1592019],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_40375022ccfab0f599772f7ad0534079 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2f13c984eecbd84e3926155af523935a = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_1426b498bc32781c0d98ad310289af56 = $(`<div id="html_1426b498bc32781c0d98ad310289af56" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Fit line</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> No</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_2f13c984eecbd84e3926155af523935a.setContent(html_1426b498bc32781c0d98ad310289af56);
+            
+        
+
+        marker_7cc941ab639de31f962f61fa8e4fa1ac.bindPopup(popup_2f13c984eecbd84e3926155af523935a)
+        ;
+
+        
+    
+    
+            marker_7cc941ab639de31f962f61fa8e4fa1ac.bindTooltip(
+                `<div>
+                     🍽️ Fit line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7cc941ab639de31f962f61fa8e4fa1ac.setIcon(icon_40375022ccfab0f599772f7ad0534079);
+            
+    
+            var marker_eee853e9731145efc8d93bb689c0feae = L.marker(
+                [-17.3764155, -66.1593522],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_8e1afa2844bca2093aefa322f0f585c9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6097a324189d34387dee304822c2987a = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_441fd7349dd906d9559ecda3f42f8984 = $(`<div id="html_441fd7349dd906d9559ecda3f42f8984" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Rustic grill</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_6097a324189d34387dee304822c2987a.setContent(html_441fd7349dd906d9559ecda3f42f8984);
+            
+        
+
+        marker_eee853e9731145efc8d93bb689c0feae.bindPopup(popup_6097a324189d34387dee304822c2987a)
+        ;
+
+        
+    
+    
+            marker_eee853e9731145efc8d93bb689c0feae.bindTooltip(
+                `<div>
+                     🍽️ Rustic grill
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_eee853e9731145efc8d93bb689c0feae.setIcon(icon_8e1afa2844bca2093aefa322f0f585c9);
+            
+    
+            var marker_f930a1a400b043e57888fae4363d3a8e = L.marker(
+                [-17.3749401, -66.1599285],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_eca3d25122d825c23be347c6900e02f3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1ef34f2064e9ce97a069dc417522cbb1 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_9d18ed547a5204da4c9f3d0dc6919fd1 = $(`<div id="html_9d18ed547a5204da4c9f3d0dc6919fd1" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Pachamamay</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_1ef34f2064e9ce97a069dc417522cbb1.setContent(html_9d18ed547a5204da4c9f3d0dc6919fd1);
+            
+        
+
+        marker_f930a1a400b043e57888fae4363d3a8e.bindPopup(popup_1ef34f2064e9ce97a069dc417522cbb1)
+        ;
+
+        
+    
+    
+            marker_f930a1a400b043e57888fae4363d3a8e.bindTooltip(
+                `<div>
+                     🍽️ Pachamamay
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f930a1a400b043e57888fae4363d3a8e.setIcon(icon_eca3d25122d825c23be347c6900e02f3);
+            
+    
+            var marker_c49ef8e947609adc6574bb7774ac5afe = L.marker(
+                [-17.3746597, -66.1599607],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_d8c3fd87fd426e0357d034322d7e23b3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cbc3a06c81e32a2afed176af27f97234 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_acdb2066d3c4f3dc50f5147ddfdf6abe = $(`<div id="html_acdb2066d3c4f3dc50f5147ddfdf6abe" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Churrasqueria El Novillero</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> No</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_cbc3a06c81e32a2afed176af27f97234.setContent(html_acdb2066d3c4f3dc50f5147ddfdf6abe);
+            
+        
+
+        marker_c49ef8e947609adc6574bb7774ac5afe.bindPopup(popup_cbc3a06c81e32a2afed176af27f97234)
+        ;
+
+        
+    
+    
+            marker_c49ef8e947609adc6574bb7774ac5afe.bindTooltip(
+                `<div>
+                     🍽️ Churrasqueria El Novillero
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c49ef8e947609adc6574bb7774ac5afe.setIcon(icon_d8c3fd87fd426e0357d034322d7e23b3);
+            
+    
+            var marker_2bb43c550c0c81fdbd234d4d2d5c5fba = L.marker(
+                [-17.3745878, -66.1599772],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_257f37177b6acfe004d7068946c4e159 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3638c9b72d342630f9c90b522fe23cdb = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_1e7ffcecc5e4a7d7a3eee7f9be4ad637 = $(`<div id="html_1e7ffcecc5e4a7d7a3eee7f9be4ad637" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Aromas del parque</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_3638c9b72d342630f9c90b522fe23cdb.setContent(html_1e7ffcecc5e4a7d7a3eee7f9be4ad637);
+            
+        
+
+        marker_2bb43c550c0c81fdbd234d4d2d5c5fba.bindPopup(popup_3638c9b72d342630f9c90b522fe23cdb)
+        ;
+
+        
+    
+    
+            marker_2bb43c550c0c81fdbd234d4d2d5c5fba.bindTooltip(
+                `<div>
+                     🍽️ Aromas del parque
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2bb43c550c0c81fdbd234d4d2d5c5fba.setIcon(icon_257f37177b6acfe004d7068946c4e159);
+            
+    
+            var marker_10d4fe269f322d3003e57a91622af5a8 = L.marker(
+                [-17.374538, -66.159998],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_2fce45528e5c21cec1286067fd99a8c9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_63480c8e0469886ce5dd354b9ebd0eda = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_98075c973e6adc7e73f856272c649d43 = $(`<div id="html_98075c973e6adc7e73f856272c649d43" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Nigiri maki o maki maki </h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_63480c8e0469886ce5dd354b9ebd0eda.setContent(html_98075c973e6adc7e73f856272c649d43);
+            
+        
+
+        marker_10d4fe269f322d3003e57a91622af5a8.bindPopup(popup_63480c8e0469886ce5dd354b9ebd0eda)
+        ;
+
+        
+    
+    
+            marker_10d4fe269f322d3003e57a91622af5a8.bindTooltip(
+                `<div>
+                     🍽️ Nigiri maki o maki maki 
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_10d4fe269f322d3003e57a91622af5a8.setIcon(icon_2fce45528e5c21cec1286067fd99a8c9);
+            
+    
+            var marker_95c439aa4bfc8119979afa00b93171d2 = L.marker(
+                [-17.3744979, -66.1599739],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_e2c8449fd6cb6faac1ac100f2a095f2b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0197b4938bf406c8c2a43fe6cdb93b01 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_940ef89715a8c0d6d7058059b023dad2 = $(`<div id="html_940ef89715a8c0d6d7058059b023dad2" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Upaya cowork</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_0197b4938bf406c8c2a43fe6cdb93b01.setContent(html_940ef89715a8c0d6d7058059b023dad2);
+            
+        
+
+        marker_95c439aa4bfc8119979afa00b93171d2.bindPopup(popup_0197b4938bf406c8c2a43fe6cdb93b01)
+        ;
+
+        
+    
+    
+            marker_95c439aa4bfc8119979afa00b93171d2.bindTooltip(
+                `<div>
+                     🍽️ Upaya cowork
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_95c439aa4bfc8119979afa00b93171d2.setIcon(icon_e2c8449fd6cb6faac1ac100f2a095f2b);
+            
+    
+            var marker_6120b84d4ea461aa301c1abedcc982e6 = L.marker(
+                [-17.3743493, -66.1590294],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_afcd5e98c5f4c78126cfb1f32b632db2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c501225ffff1651fd21b8510571fe7da = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_7d60ed12f358d1809d6dc8202c26991c = $(`<div id="html_7d60ed12f358d1809d6dc8202c26991c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Ágora Coffee Store</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_c501225ffff1651fd21b8510571fe7da.setContent(html_7d60ed12f358d1809d6dc8202c26991c);
+            
+        
+
+        marker_6120b84d4ea461aa301c1abedcc982e6.bindPopup(popup_c501225ffff1651fd21b8510571fe7da)
+        ;
+
+        
+    
+    
+            marker_6120b84d4ea461aa301c1abedcc982e6.bindTooltip(
+                `<div>
+                     🍽️ Ágora Coffee Store
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6120b84d4ea461aa301c1abedcc982e6.setIcon(icon_afcd5e98c5f4c78126cfb1f32b632db2);
+            
+    
+            var marker_0298caeb6916136ebbf26bb38a29641c = L.marker(
+                [-17.3741431, -66.1590774],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_2e5c61642e2a7a22131b1763836ac192 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e404223b5b4f5e2eaac32f6de6dde51c = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_5196ee39599cf02bff89995b7f1adfef = $(`<div id="html_5196ee39599cf02bff89995b7f1adfef" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Kausa</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_e404223b5b4f5e2eaac32f6de6dde51c.setContent(html_5196ee39599cf02bff89995b7f1adfef);
+            
+        
+
+        marker_0298caeb6916136ebbf26bb38a29641c.bindPopup(popup_e404223b5b4f5e2eaac32f6de6dde51c)
+        ;
+
+        
+    
+    
+            marker_0298caeb6916136ebbf26bb38a29641c.bindTooltip(
+                `<div>
+                     🍽️ Kausa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0298caeb6916136ebbf26bb38a29641c.setIcon(icon_2e5c61642e2a7a22131b1763836ac192);
+            
+    
+            var marker_cf3da70b25721552f76668a07b5ee4fc = L.marker(
+                [-17.3739706, -66.1591734],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_968551bcbb9bf2dc615f143907142972 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dec951830eb16d4ba05dbfb11a127262 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_163c2bc6ad999dd2c253d25c24a59deb = $(`<div id="html_163c2bc6ad999dd2c253d25c24a59deb" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">GOIANO RESTAURANTE FEIJOADA COMIDA BRASILEÑA</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_dec951830eb16d4ba05dbfb11a127262.setContent(html_163c2bc6ad999dd2c253d25c24a59deb);
+            
+        
+
+        marker_cf3da70b25721552f76668a07b5ee4fc.bindPopup(popup_dec951830eb16d4ba05dbfb11a127262)
+        ;
+
+        
+    
+    
+            marker_cf3da70b25721552f76668a07b5ee4fc.bindTooltip(
+                `<div>
+                     🍽️ GOIANO RESTAURANTE FEIJOADA COMIDA BRASILEÑA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cf3da70b25721552f76668a07b5ee4fc.setIcon(icon_968551bcbb9bf2dc615f143907142972);
+            
+    
+            var marker_7734f1453ab55766f9e3ce45b6c257eb = L.marker(
+                [-17.3735485, -66.1589705],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_fef8dbe8f7a5f973b4b8117bec327d96 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2508b5228bd0a21a670d501449a5e7ee = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_a2a4d2746d3ce91681ad7cab6ba11ed8 = $(`<div id="html_a2a4d2746d3ce91681ad7cab6ba11ed8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Cocolatte Av. Villarroel</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT Cuenta con registro de SEPREC</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_2508b5228bd0a21a670d501449a5e7ee.setContent(html_a2a4d2746d3ce91681ad7cab6ba11ed8);
+            
+        
+
+        marker_7734f1453ab55766f9e3ce45b6c257eb.bindPopup(popup_2508b5228bd0a21a670d501449a5e7ee)
+        ;
+
+        
+    
+    
+            marker_7734f1453ab55766f9e3ce45b6c257eb.bindTooltip(
+                `<div>
+                     🍽️ Cocolatte Av. Villarroel
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7734f1453ab55766f9e3ce45b6c257eb.setIcon(icon_fef8dbe8f7a5f973b4b8117bec327d96);
+            
+    
+            var marker_99ec24375327e05d87b2e9d4ee5c0fa4 = L.marker(
+                [-17.3733695, -66.1591503],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_2843ecfbb887cf60954b79ad7d498da3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f3f1af0300f99e0bda018b841e3b577a = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_0050a3f70083dc9f913531a389111a5e = $(`<div id="html_0050a3f70083dc9f913531a389111a5e" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">La quebrada</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> No</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_f3f1af0300f99e0bda018b841e3b577a.setContent(html_0050a3f70083dc9f913531a389111a5e);
+            
+        
+
+        marker_99ec24375327e05d87b2e9d4ee5c0fa4.bindPopup(popup_f3f1af0300f99e0bda018b841e3b577a)
+        ;
+
+        
+    
+    
+            marker_99ec24375327e05d87b2e9d4ee5c0fa4.bindTooltip(
+                `<div>
+                     🍽️ La quebrada
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_99ec24375327e05d87b2e9d4ee5c0fa4.setIcon(icon_2843ecfbb887cf60954b79ad7d498da3);
+            
+    
+            var marker_dd4d0c3e7a25b33fadfe7118068dd944 = L.marker(
+                [-17.3738005, -66.1573474],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_75450a2d1661194f05c4eff24e2c651c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_481f234132253cab74e0284f21765e5d = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_907dece022ba16182cd449f1bbe5bc2a = $(`<div id="html_907dece022ba16182cd449f1bbe5bc2a" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Viernes santo</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_481f234132253cab74e0284f21765e5d.setContent(html_907dece022ba16182cd449f1bbe5bc2a);
+            
+        
+
+        marker_dd4d0c3e7a25b33fadfe7118068dd944.bindPopup(popup_481f234132253cab74e0284f21765e5d)
+        ;
+
+        
+    
+    
+            marker_dd4d0c3e7a25b33fadfe7118068dd944.bindTooltip(
+                `<div>
+                     🍽️ Viernes santo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dd4d0c3e7a25b33fadfe7118068dd944.setIcon(icon_75450a2d1661194f05c4eff24e2c651c);
+            
+    
+            var marker_f6150a17df6c9deb53a8621744ec609a = L.marker(
+                [-17.3738414, -66.1574521],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_94ce208b547477c69d4c4bb996bd0db5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bfd9090589be0b6f65b9acfb5af36fa8 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_de9720095a4edc403a80eda24018d245 = $(`<div id="html_de9720095a4edc403a80eda24018d245" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Rincón queru queru</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_bfd9090589be0b6f65b9acfb5af36fa8.setContent(html_de9720095a4edc403a80eda24018d245);
+            
+        
+
+        marker_f6150a17df6c9deb53a8621744ec609a.bindPopup(popup_bfd9090589be0b6f65b9acfb5af36fa8)
+        ;
+
+        
+    
+    
+            marker_f6150a17df6c9deb53a8621744ec609a.bindTooltip(
+                `<div>
+                     🍽️ Rincón queru queru
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f6150a17df6c9deb53a8621744ec609a.setIcon(icon_94ce208b547477c69d4c4bb996bd0db5);
+            
+    
+            var marker_213835edbd20bdf35337d4ba6318f04b = L.marker(
+                [-17.3766652, -66.1569845],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_879660b5a6d42b3f1d8bf58cf3cd6067 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c76c821d80bca834bd83f85b9d9c53bb = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_77f84855c65fef6e0f1ae8f020eaf07b = $(`<div id="html_77f84855c65fef6e0f1ae8f020eaf07b" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Happy Fry</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_c76c821d80bca834bd83f85b9d9c53bb.setContent(html_77f84855c65fef6e0f1ae8f020eaf07b);
+            
+        
+
+        marker_213835edbd20bdf35337d4ba6318f04b.bindPopup(popup_c76c821d80bca834bd83f85b9d9c53bb)
+        ;
+
+        
+    
+    
+            marker_213835edbd20bdf35337d4ba6318f04b.bindTooltip(
+                `<div>
+                     🍽️ Happy Fry
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_213835edbd20bdf35337d4ba6318f04b.setIcon(icon_879660b5a6d42b3f1d8bf58cf3cd6067);
+            
+    
+            var marker_4b1f4c66bab166d28768c3083c13981d = L.marker(
+                [-17.3767125, -66.1569703],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_3eeda745fafdf262cc37589cddc22bff = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a35b8d1dea4020382d5dd984c6e22e2d = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_cd613272c1fbb7f8a9dc64c10dd3b7ad = $(`<div id="html_cd613272c1fbb7f8a9dc64c10dd3b7ad" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Los globos</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT Cuenta con registro de SEPREC</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_a35b8d1dea4020382d5dd984c6e22e2d.setContent(html_cd613272c1fbb7f8a9dc64c10dd3b7ad);
+            
+        
+
+        marker_4b1f4c66bab166d28768c3083c13981d.bindPopup(popup_a35b8d1dea4020382d5dd984c6e22e2d)
+        ;
+
+        
+    
+    
+            marker_4b1f4c66bab166d28768c3083c13981d.bindTooltip(
+                `<div>
+                     🍽️ Los globos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4b1f4c66bab166d28768c3083c13981d.setIcon(icon_3eeda745fafdf262cc37589cddc22bff);
+            
+    
+            var marker_b4409a964b2d2b8d0d5d2d9441c61cca = L.marker(
+                [-17.3775386, -66.1570037],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_cad5ab24c925a688d08778eb6b02b331 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a157f386472263aa3dfb2c90caa54ba2 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_818f34d663144ae71ce88368ef842e6c = $(`<div id="html_818f34d663144ae71ce88368ef842e6c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">MOTACÚ</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_a157f386472263aa3dfb2c90caa54ba2.setContent(html_818f34d663144ae71ce88368ef842e6c);
+            
+        
+
+        marker_b4409a964b2d2b8d0d5d2d9441c61cca.bindPopup(popup_a157f386472263aa3dfb2c90caa54ba2)
+        ;
+
+        
+    
+    
+            marker_b4409a964b2d2b8d0d5d2d9441c61cca.bindTooltip(
+                `<div>
+                     🍽️ MOTACÚ
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b4409a964b2d2b8d0d5d2d9441c61cca.setIcon(icon_cad5ab24c925a688d08778eb6b02b331);
+            
+    
+            var marker_68f2b399bb7e09ff8902ad3b66ff7070 = L.marker(
+                [-17.3775378, -66.1570142],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_56256a77169540ad213b621fd0be2509 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_64be055b8007d7391f35defda17354a7 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_50c2495dc20be291dc5efa8e89f9f555 = $(`<div id="html_50c2495dc20be291dc5efa8e89f9f555" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Pensión maya</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> No</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_64be055b8007d7391f35defda17354a7.setContent(html_50c2495dc20be291dc5efa8e89f9f555);
+            
+        
+
+        marker_68f2b399bb7e09ff8902ad3b66ff7070.bindPopup(popup_64be055b8007d7391f35defda17354a7)
+        ;
+
+        
+    
+    
+            marker_68f2b399bb7e09ff8902ad3b66ff7070.bindTooltip(
+                `<div>
+                     🍽️ Pensión maya
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_68f2b399bb7e09ff8902ad3b66ff7070.setIcon(icon_56256a77169540ad213b621fd0be2509);
+            
+    
+            var marker_ebe5a8cfa7b094382755b04c9cd15f51 = L.marker(
+                [-17.3784922, -66.1570859],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_eb4003b97d200c99b95d6af2169b38e8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7c021363d11baa905386e4e13c183d17 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_36a3dc9bd174276a94a4fc0c9ab59b7d = $(`<div id="html_36a3dc9bd174276a94a4fc0c9ab59b7d" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">K-Donuts Suc. Av. Santa Cruz</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_7c021363d11baa905386e4e13c183d17.setContent(html_36a3dc9bd174276a94a4fc0c9ab59b7d);
+            
+        
+
+        marker_ebe5a8cfa7b094382755b04c9cd15f51.bindPopup(popup_7c021363d11baa905386e4e13c183d17)
+        ;
+
+        
+    
+    
+            marker_ebe5a8cfa7b094382755b04c9cd15f51.bindTooltip(
+                `<div>
+                     🍽️ K-Donuts Suc. Av. Santa Cruz
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ebe5a8cfa7b094382755b04c9cd15f51.setIcon(icon_eb4003b97d200c99b95d6af2169b38e8);
+            
+    
+            var marker_69487437f2850036957db047c171556f = L.marker(
+                [-17.3792637, -66.1571177],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_27703be9c984e05736c2da8ae75cb222 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bf416cafde9cf896619700b58c58ed21 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_26b536c175b2f554a7d2bb946b9113fb = $(`<div id="html_26b536c175b2f554a7d2bb946b9113fb" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">BROS</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_bf416cafde9cf896619700b58c58ed21.setContent(html_26b536c175b2f554a7d2bb946b9113fb);
+            
+        
+
+        marker_69487437f2850036957db047c171556f.bindPopup(popup_bf416cafde9cf896619700b58c58ed21)
+        ;
+
+        
+    
+    
+            marker_69487437f2850036957db047c171556f.bindTooltip(
+                `<div>
+                     🍽️ BROS
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_69487437f2850036957db047c171556f.setIcon(icon_27703be9c984e05736c2da8ae75cb222);
+            
+    
+            var marker_66cdb82b9396347e406bb7aca97e2778 = L.marker(
+                [-17.3781479, -66.1573436],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_bc3c79a3ad5c7dd10f1d4c5caee474c4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4e12760104eb2f9c1ae9a60e360acc3d = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_5ec70ba79fe27fb232eb36646c0e9a91 = $(`<div id="html_5ec70ba79fe27fb232eb36646c0e9a91" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">El nelo</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> No</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_4e12760104eb2f9c1ae9a60e360acc3d.setContent(html_5ec70ba79fe27fb232eb36646c0e9a91);
+            
+        
+
+        marker_66cdb82b9396347e406bb7aca97e2778.bindPopup(popup_4e12760104eb2f9c1ae9a60e360acc3d)
+        ;
+
+        
+    
+    
+            marker_66cdb82b9396347e406bb7aca97e2778.bindTooltip(
+                `<div>
+                     🍽️ El nelo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_66cdb82b9396347e406bb7aca97e2778.setIcon(icon_bc3c79a3ad5c7dd10f1d4c5caee474c4);
+            
+    
+            var marker_57ea7377d0341e7cc56ad31a0f124f15 = L.marker(
+                [-17.378012, -66.1574712],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_3576066a7a2340f554e65d90e36ca934 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_17f505a65e9d3ce73d4918bff165717a = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_a2481f7f87f056fcab906af7d8f70d7c = $(`<div id="html_a2481f7f87f056fcab906af7d8f70d7c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">La Carreta Del Toro</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_17f505a65e9d3ce73d4918bff165717a.setContent(html_a2481f7f87f056fcab906af7d8f70d7c);
+            
+        
+
+        marker_57ea7377d0341e7cc56ad31a0f124f15.bindPopup(popup_17f505a65e9d3ce73d4918bff165717a)
+        ;
+
+        
+    
+    
+            marker_57ea7377d0341e7cc56ad31a0f124f15.bindTooltip(
+                `<div>
+                     🍽️ La Carreta Del Toro
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_57ea7377d0341e7cc56ad31a0f124f15.setIcon(icon_3576066a7a2340f554e65d90e36ca934);
+            
+    
+            var marker_277b826e6b70d12eef1d774bf718dd33 = L.marker(
+                [-17.3779449, -66.1581489],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_012da5d414f9a4c1fe33320a734b7753 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_960912071219802a6f7cd262f5cbf98a = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_b4538a57f27bc21be65676e0e00f97e8 = $(`<div id="html_b4538a57f27bc21be65676e0e00f97e8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Montenegro restaurante</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> No</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_960912071219802a6f7cd262f5cbf98a.setContent(html_b4538a57f27bc21be65676e0e00f97e8);
+            
+        
+
+        marker_277b826e6b70d12eef1d774bf718dd33.bindPopup(popup_960912071219802a6f7cd262f5cbf98a)
+        ;
+
+        
+    
+    
+            marker_277b826e6b70d12eef1d774bf718dd33.bindTooltip(
+                `<div>
+                     🍽️ Montenegro restaurante
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_277b826e6b70d12eef1d774bf718dd33.setIcon(icon_012da5d414f9a4c1fe33320a734b7753);
+            
+    
+            var marker_100ad16f2389680da3bdf489e5909970 = L.marker(
+                [-17.376857, -66.1590239],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_6279f6b042828d941eac4d2def7b3212 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_05ddf77823f889e9438059900080f486 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_421f7d4730e1cffc6e3687374f2a157f = $(`<div id="html_421f7d4730e1cffc6e3687374f2a157f" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">María Bonita</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_05ddf77823f889e9438059900080f486.setContent(html_421f7d4730e1cffc6e3687374f2a157f);
+            
+        
+
+        marker_100ad16f2389680da3bdf489e5909970.bindPopup(popup_05ddf77823f889e9438059900080f486)
+        ;
+
+        
+    
+    
+            marker_100ad16f2389680da3bdf489e5909970.bindTooltip(
+                `<div>
+                     🍽️ María Bonita
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_100ad16f2389680da3bdf489e5909970.setIcon(icon_6279f6b042828d941eac4d2def7b3212);
+            
+    
+            var marker_9a6e185255ab293d4d4ca33c8df3a156 = L.marker(
+                [-17.3768412, -66.1588568],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_94dd98a5bc2d16ae680e7b7a87fd8a7c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_11038f98d8754e3260df6bf29ec5d6de = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_5062611658604a1a0124b0e2104a744a = $(`<div id="html_5062611658604a1a0124b0e2104a744a" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Mamma Mía Cochabamba</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_11038f98d8754e3260df6bf29ec5d6de.setContent(html_5062611658604a1a0124b0e2104a744a);
+            
+        
+
+        marker_9a6e185255ab293d4d4ca33c8df3a156.bindPopup(popup_11038f98d8754e3260df6bf29ec5d6de)
+        ;
+
+        
+    
+    
+            marker_9a6e185255ab293d4d4ca33c8df3a156.bindTooltip(
+                `<div>
+                     🍽️ Mamma Mía Cochabamba
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9a6e185255ab293d4d4ca33c8df3a156.setIcon(icon_94dd98a5bc2d16ae680e7b7a87fd8a7c);
+            
+    
+            var marker_8efa3841111bf01d8d51f3335cc4ffa2 = L.marker(
+                [-17.376828, -66.1586902],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_e247d5eb4137d7e8d9579181f8d3b1de = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_58ee688384ee0f8b548e47e59aa6f521 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_90f74a0ab840513f71feb05a43db0527 = $(`<div id="html_90f74a0ab840513f71feb05a43db0527" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Los Leños Sabor Chapaco</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_58ee688384ee0f8b548e47e59aa6f521.setContent(html_90f74a0ab840513f71feb05a43db0527);
+            
+        
+
+        marker_8efa3841111bf01d8d51f3335cc4ffa2.bindPopup(popup_58ee688384ee0f8b548e47e59aa6f521)
+        ;
+
+        
+    
+    
+            marker_8efa3841111bf01d8d51f3335cc4ffa2.bindTooltip(
+                `<div>
+                     🍽️ Los Leños Sabor Chapaco
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8efa3841111bf01d8d51f3335cc4ffa2.setIcon(icon_e247d5eb4137d7e8d9579181f8d3b1de);
+            
+    
+            var marker_17204d20b48193480b93f4a4fa99e8f8 = L.marker(
+                [-17.3768384, -66.1583635],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_142cc62aab0941824417f482b607296d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_844403105c24e879928cc14855b8db92 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_2c07e5475c1a8206aae8196a761f8e41 = $(`<div id="html_2c07e5475c1a8206aae8196a761f8e41" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Zen Nikkei Sushi</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_844403105c24e879928cc14855b8db92.setContent(html_2c07e5475c1a8206aae8196a761f8e41);
+            
+        
+
+        marker_17204d20b48193480b93f4a4fa99e8f8.bindPopup(popup_844403105c24e879928cc14855b8db92)
+        ;
+
+        
+    
+    
+            marker_17204d20b48193480b93f4a4fa99e8f8.bindTooltip(
+                `<div>
+                     🍽️ Zen Nikkei Sushi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_17204d20b48193480b93f4a4fa99e8f8.setIcon(icon_142cc62aab0941824417f482b607296d);
+            
+    
+            var marker_ee1f00364159e463856ce12c833442d3 = L.marker(
+                [-17.37685, -66.1581346],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_512b8a043224e2609f29f2e5e66d1326 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_48bdb1f899cfad4232aa15024ba7a4f8 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_b818e48725e6940f7eb019a1b29aea8c = $(`<div id="html_b818e48725e6940f7eb019a1b29aea8c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Esséncia</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_48bdb1f899cfad4232aa15024ba7a4f8.setContent(html_b818e48725e6940f7eb019a1b29aea8c);
+            
+        
+
+        marker_ee1f00364159e463856ce12c833442d3.bindPopup(popup_48bdb1f899cfad4232aa15024ba7a4f8)
+        ;
+
+        
+    
+    
+            marker_ee1f00364159e463856ce12c833442d3.bindTooltip(
+                `<div>
+                     🍽️ Esséncia
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ee1f00364159e463856ce12c833442d3.setIcon(icon_512b8a043224e2609f29f2e5e66d1326);
+            
+    
+            var marker_a00658f5b02ff89f444dfc243b7a7554 = L.marker(
+                [-17.3762452, -66.1581381],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_7eace61d1a8cff88020b4b9c592429ac = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d457d2bcf76d331849437486f86505d9 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_7ff9d0ebf6a894252d9423a8cf7a0364 = $(`<div id="html_7ff9d0ebf6a894252d9423a8cf7a0364" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Suculenta</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_d457d2bcf76d331849437486f86505d9.setContent(html_7ff9d0ebf6a894252d9423a8cf7a0364);
+            
+        
+
+        marker_a00658f5b02ff89f444dfc243b7a7554.bindPopup(popup_d457d2bcf76d331849437486f86505d9)
+        ;
+
+        
+    
+    
+            marker_a00658f5b02ff89f444dfc243b7a7554.bindTooltip(
+                `<div>
+                     🍽️ Suculenta
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a00658f5b02ff89f444dfc243b7a7554.setIcon(icon_7eace61d1a8cff88020b4b9c592429ac);
+            
+    
+            var marker_7738c766b29d8229c82e3fe3d2434217 = L.marker(
+                [-17.3758227, -66.1577545],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_c7c313f0206b2f50aebd744cbb10ee9e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_71e366cb8e6ded0d4c9a8383d49232f3 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_13f69d26786e35611b593433740fc843 = $(`<div id="html_13f69d26786e35611b593433740fc843" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Kansas Grill & Bar</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT Cuenta con registro de SEPREC</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_71e366cb8e6ded0d4c9a8383d49232f3.setContent(html_13f69d26786e35611b593433740fc843);
+            
+        
+
+        marker_7738c766b29d8229c82e3fe3d2434217.bindPopup(popup_71e366cb8e6ded0d4c9a8383d49232f3)
+        ;
+
+        
+    
+    
+            marker_7738c766b29d8229c82e3fe3d2434217.bindTooltip(
+                `<div>
+                     🍽️ Kansas Grill & Bar
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7738c766b29d8229c82e3fe3d2434217.setIcon(icon_c7c313f0206b2f50aebd744cbb10ee9e);
+            
+    
+            var marker_301ee75011700755564eb81ff82fc1be = L.marker(
+                [-17.3733887, -66.1549074],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_481b069c65cb8749eed6578f8d95b340 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b9b5bb3a6e27c5291c1c2285c6b94a4a = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_dce25a65e142037a242c33a601b5e0aa = $(`<div id="html_dce25a65e142037a242c33a601b5e0aa" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Pachamé Ramen</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_b9b5bb3a6e27c5291c1c2285c6b94a4a.setContent(html_dce25a65e142037a242c33a601b5e0aa);
+            
+        
+
+        marker_301ee75011700755564eb81ff82fc1be.bindPopup(popup_b9b5bb3a6e27c5291c1c2285c6b94a4a)
+        ;
+
+        
+    
+    
+            marker_301ee75011700755564eb81ff82fc1be.bindTooltip(
+                `<div>
+                     🍽️ Pachamé Ramen
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_301ee75011700755564eb81ff82fc1be.setIcon(icon_481b069c65cb8749eed6578f8d95b340);
+            
+    
+            var marker_3484b05fec6cfab6095e2fafea40f00c = L.marker(
+                [-17.3750758, -66.1544815],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_4bc18985c20c5a112a07f4a47e5a1ee7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_543c0f511146c693271bd6560b89d70c = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_0581c83cc301de51f0c08fd8e926431a = $(`<div id="html_0581c83cc301de51f0c08fd8e926431a" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">La Chanchada</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_543c0f511146c693271bd6560b89d70c.setContent(html_0581c83cc301de51f0c08fd8e926431a);
+            
+        
+
+        marker_3484b05fec6cfab6095e2fafea40f00c.bindPopup(popup_543c0f511146c693271bd6560b89d70c)
+        ;
+
+        
+    
+    
+            marker_3484b05fec6cfab6095e2fafea40f00c.bindTooltip(
+                `<div>
+                     🍽️ La Chanchada
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3484b05fec6cfab6095e2fafea40f00c.setIcon(icon_4bc18985c20c5a112a07f4a47e5a1ee7);
+            
+    
+            var marker_52964c949540ec1e9a3cf2aa93a3c25c = L.marker(
+                [-17.3754075, -66.1539908],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_eda14e0e2e75757ca28f799809eafd6f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_54e04c4377b2a72fd084b085159250d8 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_bdca657dcf62976028d24bde68990700 = $(`<div id="html_bdca657dcf62976028d24bde68990700" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Casona del Molino Cochabamba</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT Cuenta con registro de SEPREC</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_54e04c4377b2a72fd084b085159250d8.setContent(html_bdca657dcf62976028d24bde68990700);
+            
+        
+
+        marker_52964c949540ec1e9a3cf2aa93a3c25c.bindPopup(popup_54e04c4377b2a72fd084b085159250d8)
+        ;
+
+        
+    
+    
+            marker_52964c949540ec1e9a3cf2aa93a3c25c.bindTooltip(
+                `<div>
+                     🍽️ Casona del Molino Cochabamba
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_52964c949540ec1e9a3cf2aa93a3c25c.setIcon(icon_eda14e0e2e75757ca28f799809eafd6f);
+            
+    
+            var marker_561d694681a915e12c49a67d85f2d150 = L.marker(
+                [-17.3756001, -66.154001],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_2a6c8961ebb79561b30aabe6b401c6cd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c90238306cef193347003c8db5462662 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_ae5fce9940877a57beee9c7dae677d57 = $(`<div id="html_ae5fce9940877a57beee9c7dae677d57" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Simón Coffee</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_c90238306cef193347003c8db5462662.setContent(html_ae5fce9940877a57beee9c7dae677d57);
+            
+        
+
+        marker_561d694681a915e12c49a67d85f2d150.bindPopup(popup_c90238306cef193347003c8db5462662)
+        ;
+
+        
+    
+    
+            marker_561d694681a915e12c49a67d85f2d150.bindTooltip(
+                `<div>
+                     🍽️ Simón Coffee
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_561d694681a915e12c49a67d85f2d150.setIcon(icon_2a6c8961ebb79561b30aabe6b401c6cd);
+            
+    
+            var marker_612d479f3c52a7d1081d5216a2f73e09 = L.marker(
+                [-17.3759149, -66.1540016],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_b4a18118459b0f16d5b1636e3505ad55 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_571b2f64c2525a6e729a2d85d8321bc5 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_82b5f86450aa31b9895e6d0b8aa9a43f = $(`<div id="html_82b5f86450aa31b9895e6d0b8aa9a43f" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">La Arepera</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT Cuenta con registro de SEPREC</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_571b2f64c2525a6e729a2d85d8321bc5.setContent(html_82b5f86450aa31b9895e6d0b8aa9a43f);
+            
+        
+
+        marker_612d479f3c52a7d1081d5216a2f73e09.bindPopup(popup_571b2f64c2525a6e729a2d85d8321bc5)
+        ;
+
+        
+    
+    
+            marker_612d479f3c52a7d1081d5216a2f73e09.bindTooltip(
+                `<div>
+                     🍽️ La Arepera
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_612d479f3c52a7d1081d5216a2f73e09.setIcon(icon_b4a18118459b0f16d5b1636e3505ad55);
+            
+    
+            var marker_e7cf10e4786e689c8646c2986d230ecc = L.marker(
+                [-17.3768074, -66.1540042],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_162f0b173578dcbcd91d4da38f7c0b5d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_13e2a31d6fae5fef775d9a55ebd46b10 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_18e957a0375f5cce3648884eef5fdc96 = $(`<div id="html_18e957a0375f5cce3648884eef5fdc96" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Cevichería Doris</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_13e2a31d6fae5fef775d9a55ebd46b10.setContent(html_18e957a0375f5cce3648884eef5fdc96);
+            
+        
+
+        marker_e7cf10e4786e689c8646c2986d230ecc.bindPopup(popup_13e2a31d6fae5fef775d9a55ebd46b10)
+        ;
+
+        
+    
+    
+            marker_e7cf10e4786e689c8646c2986d230ecc.bindTooltip(
+                `<div>
+                     🍽️ Cevichería Doris
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e7cf10e4786e689c8646c2986d230ecc.setIcon(icon_162f0b173578dcbcd91d4da38f7c0b5d);
+            
+    
+            var marker_ad99177e0cca9ac1e719b51af720b78d = L.marker(
+                [-17.3772745, -66.1540812],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_40af211771a2e5eb3221905de98db096 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e64c7dbc170e6ae14150b8888bbeef07 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_e48b81992cea2f0ff44b9ea3b9f1d455 = $(`<div id="html_e48b81992cea2f0ff44b9ea3b9f1d455" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Modena Café</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_e64c7dbc170e6ae14150b8888bbeef07.setContent(html_e48b81992cea2f0ff44b9ea3b9f1d455);
+            
+        
+
+        marker_ad99177e0cca9ac1e719b51af720b78d.bindPopup(popup_e64c7dbc170e6ae14150b8888bbeef07)
+        ;
+
+        
+    
+    
+            marker_ad99177e0cca9ac1e719b51af720b78d.bindTooltip(
+                `<div>
+                     🍽️ Modena Café
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ad99177e0cca9ac1e719b51af720b78d.setIcon(icon_40af211771a2e5eb3221905de98db096);
+            
+    
+            var marker_491d2c3399f337e694894728e66fdcc0 = L.marker(
+                [-17.3779605, -66.1541632],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_34a1bc6bc69d5e5c11d8e902cd271659 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5fe24f723ae8d96f31e28d875ee98df5 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_860e338200d1632145b3a4c5b0f77fba = $(`<div id="html_860e338200d1632145b3a4c5b0f77fba" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Author •cafe y bebidas•</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_5fe24f723ae8d96f31e28d875ee98df5.setContent(html_860e338200d1632145b3a4c5b0f77fba);
+            
+        
+
+        marker_491d2c3399f337e694894728e66fdcc0.bindPopup(popup_5fe24f723ae8d96f31e28d875ee98df5)
+        ;
+
+        
+    
+    
+            marker_491d2c3399f337e694894728e66fdcc0.bindTooltip(
+                `<div>
+                     🍽️ Author •cafe y bebidas•
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_491d2c3399f337e694894728e66fdcc0.setIcon(icon_34a1bc6bc69d5e5c11d8e902cd271659);
+            
+    
+            var marker_2faa4fc43af2ab339981d19d4fed3ad0 = L.marker(
+                [-17.3785211, -66.1541776],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_4a372647032009321fcf09ceeaa88d5a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_276cacb758907de58194e088a81c11a5 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_ecb4258a0ab1b665b245e8a30d8e0b1d = $(`<div id="html_ecb4258a0ab1b665b245e8a30d8e0b1d" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Mr. Chicken House</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_276cacb758907de58194e088a81c11a5.setContent(html_ecb4258a0ab1b665b245e8a30d8e0b1d);
+            
+        
+
+        marker_2faa4fc43af2ab339981d19d4fed3ad0.bindPopup(popup_276cacb758907de58194e088a81c11a5)
+        ;
+
+        
+    
+    
+            marker_2faa4fc43af2ab339981d19d4fed3ad0.bindTooltip(
+                `<div>
+                     🍽️ Mr. Chicken House
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2faa4fc43af2ab339981d19d4fed3ad0.setIcon(icon_4a372647032009321fcf09ceeaa88d5a);
+            
+    
+            var marker_2e429a95df7ddfee0926a8bdcb2119a4 = L.marker(
+                [-17.3790403, -66.1542089],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_853c51234b2a65d12d59589e472a7198 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a121680d90005a4464e6bf90150d0d09 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_292c1af746d56bd7733acbc3eada16e7 = $(`<div id="html_292c1af746d56bd7733acbc3eada16e7" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Muela del Diablo</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT Cuenta con registro de SEPREC</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_a121680d90005a4464e6bf90150d0d09.setContent(html_292c1af746d56bd7733acbc3eada16e7);
+            
+        
+
+        marker_2e429a95df7ddfee0926a8bdcb2119a4.bindPopup(popup_a121680d90005a4464e6bf90150d0d09)
+        ;
+
+        
+    
+    
+            marker_2e429a95df7ddfee0926a8bdcb2119a4.bindTooltip(
+                `<div>
+                     🍽️ Muela del Diablo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2e429a95df7ddfee0926a8bdcb2119a4.setIcon(icon_853c51234b2a65d12d59589e472a7198);
+            
+    
+            var marker_946d40ecdc0c37ef877db9c82aa311df = L.marker(
+                [-17.3791237, -66.1542071],
+                {
+}
+            ).addTo(feature_group_d7da83b48f849ff315e18cab8b53f924);
+        
+    
+            var icon_6a076194220be0c5fd1f389c323b41c0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a498fddb65f2a3acfcda32de2463bfd4 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_a715e5e1c036d9edf960dc5605cfb54d = $(`<div id="html_a715e5e1c036d9edf960dc5605cfb54d" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#E65100;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🍽️ Gastronomía             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">KOA Café</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_a498fddb65f2a3acfcda32de2463bfd4.setContent(html_a715e5e1c036d9edf960dc5605cfb54d);
+            
+        
+
+        marker_946d40ecdc0c37ef877db9c82aa311df.bindPopup(popup_a498fddb65f2a3acfcda32de2463bfd4)
+        ;
+
+        
+    
+    
+            marker_946d40ecdc0c37ef877db9c82aa311df.bindTooltip(
+                `<div>
+                     🍽️ KOA Café
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_946d40ecdc0c37ef877db9c82aa311df.setIcon(icon_6a076194220be0c5fd1f389c323b41c0);
+            
+    
+            feature_group_d7da83b48f849ff315e18cab8b53f924.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+    
+            var feature_group_36cd544348061d95b85614ee38d98b36 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_445061713953b00276b61395bb4a9c3e = L.marker(
+                [-17.377021, -66.1575402],
+                {
+}
+            ).addTo(feature_group_36cd544348061d95b85614ee38d98b36);
+        
+    
+            var icon_ddf7fad16449bad24efc6448ee27b052 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9a0c8aa518a9eb449428f590e5430701 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_3f3515340321edea3afadcf7deafce83 = $(`<div id="html_3f3515340321edea3afadcf7deafce83" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#6A1B9A;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🏨 Hospedaje             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Estudio elegante y calido o EURIGA</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_9a0c8aa518a9eb449428f590e5430701.setContent(html_3f3515340321edea3afadcf7deafce83);
+            
+        
+
+        marker_445061713953b00276b61395bb4a9c3e.bindPopup(popup_9a0c8aa518a9eb449428f590e5430701)
+        ;
+
+        
+    
+    
+            marker_445061713953b00276b61395bb4a9c3e.bindTooltip(
+                `<div>
+                     🏨 Estudio elegante y calido o EURIGA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_445061713953b00276b61395bb4a9c3e.setIcon(icon_ddf7fad16449bad24efc6448ee27b052);
+            
+    
+            var marker_4b3f8aaeb2bf6aa9087abf0e4ccdf369 = L.marker(
+                [-17.3739741, -66.1543712],
+                {
+}
+            ).addTo(feature_group_36cd544348061d95b85614ee38d98b36);
+        
+    
+            var icon_c4834c019dbfd37e3ae005ca8d4d8eb6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d494995f610bdb915c7c5b97d427d67e = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_3e027be73842777e560df365c3d913ed = $(`<div id="html_3e027be73842777e560df365c3d913ed" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#6A1B9A;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🏨 Hospedaje             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Sociedad hotelera  Aranjuez Cochabamba S.A</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT Cuenta con registro de SEPREC</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_d494995f610bdb915c7c5b97d427d67e.setContent(html_3e027be73842777e560df365c3d913ed);
+            
+        
+
+        marker_4b3f8aaeb2bf6aa9087abf0e4ccdf369.bindPopup(popup_d494995f610bdb915c7c5b97d427d67e)
+        ;
+
+        
+    
+    
+            marker_4b3f8aaeb2bf6aa9087abf0e4ccdf369.bindTooltip(
+                `<div>
+                     🏨 Sociedad hotelera  Aranjuez Cochabamba S.A
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4b3f8aaeb2bf6aa9087abf0e4ccdf369.setIcon(icon_c4834c019dbfd37e3ae005ca8d4d8eb6);
+            
+    
+            var marker_c0cd832164b3dbe31ed37431ef01788f = L.marker(
+                [-17.375857, -66.1540021],
+                {
+}
+            ).addTo(feature_group_36cd544348061d95b85614ee38d98b36);
+        
+    
+            var icon_26d5f2f3b45c2f8db1b1c77f5334c9ab = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_06bdaead87cce2bc151bd51d611391ee = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_f9b44a3f086b46e746d97f8f5089a95a = $(`<div id="html_f9b44a3f086b46e746d97f8f5089a95a" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#6A1B9A;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🏨 Hospedaje             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Hotel Anteus</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_06bdaead87cce2bc151bd51d611391ee.setContent(html_f9b44a3f086b46e746d97f8f5089a95a);
+            
+        
+
+        marker_c0cd832164b3dbe31ed37431ef01788f.bindPopup(popup_06bdaead87cce2bc151bd51d611391ee)
+        ;
+
+        
+    
+    
+            marker_c0cd832164b3dbe31ed37431ef01788f.bindTooltip(
+                `<div>
+                     🏨 Hotel Anteus
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c0cd832164b3dbe31ed37431ef01788f.setIcon(icon_26d5f2f3b45c2f8db1b1c77f5334c9ab);
+            
+    
+            var marker_05f7f964312ff09be33c2c52c28a7ffb = L.marker(
+                [-17.3803398, -66.1591034],
+                {
+}
+            ).addTo(feature_group_36cd544348061d95b85614ee38d98b36);
+        
+    
+            var icon_0239f8ee84902f458f00f18ce4d33c3a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d312bf7061ea866d82c11ba392856f7b = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_423c02cce2e7875e87c2534e27a3313f = $(`<div id="html_423c02cce2e7875e87c2534e27a3313f" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#6A1B9A;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🏨 Hospedaje             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Oblitas Hotel</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_d312bf7061ea866d82c11ba392856f7b.setContent(html_423c02cce2e7875e87c2534e27a3313f);
+            
+        
+
+        marker_05f7f964312ff09be33c2c52c28a7ffb.bindPopup(popup_d312bf7061ea866d82c11ba392856f7b)
+        ;
+
+        
+    
+    
+            marker_05f7f964312ff09be33c2c52c28a7ffb.bindTooltip(
+                `<div>
+                     🏨 Oblitas Hotel
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_05f7f964312ff09be33c2c52c28a7ffb.setIcon(icon_0239f8ee84902f458f00f18ce4d33c3a);
+            
+    
+            feature_group_36cd544348061d95b85614ee38d98b36.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+    
+            var feature_group_50262a9884c4e5c38128ad5a0cf6ebc0 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_e34df6e678adb450592b387015e8a770 = L.marker(
+                [-17.3797545, -66.1572162],
+                {
+}
+            ).addTo(feature_group_50262a9884c4e5c38128ad5a0cf6ebc0);
+        
+    
+            var icon_e3e4ad41c6bcfb5b6ebb122a9f2672df = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "music",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_565409456deafad03094916e6a6f06e3 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_4580a751c00b9b3acc1c5c65231d23d5 = $(`<div id="html_4580a751c00b9b3acc1c5c65231d23d5" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#C2185B;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🎭 Ocio             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Billar Royal VIP</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_565409456deafad03094916e6a6f06e3.setContent(html_4580a751c00b9b3acc1c5c65231d23d5);
+            
+        
+
+        marker_e34df6e678adb450592b387015e8a770.bindPopup(popup_565409456deafad03094916e6a6f06e3)
+        ;
+
+        
+    
+    
+            marker_e34df6e678adb450592b387015e8a770.bindTooltip(
+                `<div>
+                     🎭 Billar Royal VIP
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e34df6e678adb450592b387015e8a770.setIcon(icon_e3e4ad41c6bcfb5b6ebb122a9f2672df);
+            
+    
+            var marker_c9ed27e8d433e5344e9a82af3a662715 = L.marker(
+                [-17.3736693, -66.1547965],
+                {
+}
+            ).addTo(feature_group_50262a9884c4e5c38128ad5a0cf6ebc0);
+        
+    
+            var icon_c782cad5250575768e49f7c151a9b92f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "music",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1eda8670b7f80c9287ec01813164e763 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_1c9c3ab2a460dbc50bf5f2b634aa083b = $(`<div id="html_1c9c3ab2a460dbc50bf5f2b634aa083b" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#C2185B;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🎭 Ocio             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">KHALI</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_1eda8670b7f80c9287ec01813164e763.setContent(html_1c9c3ab2a460dbc50bf5f2b634aa083b);
+            
+        
+
+        marker_c9ed27e8d433e5344e9a82af3a662715.bindPopup(popup_1eda8670b7f80c9287ec01813164e763)
+        ;
+
+        
+    
+    
+            marker_c9ed27e8d433e5344e9a82af3a662715.bindTooltip(
+                `<div>
+                     🎭 KHALI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c9ed27e8d433e5344e9a82af3a662715.setIcon(icon_c782cad5250575768e49f7c151a9b92f);
+            
+    
+            var marker_841f4cedd4c45dbe319266b1fe2bfa2a = L.marker(
+                [-17.3751073, -66.1541862],
+                {
+}
+            ).addTo(feature_group_50262a9884c4e5c38128ad5a0cf6ebc0);
+        
+    
+            var icon_ab34cdc96d7ad6b0322d398944d6d1cb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "music",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_591190ebf9323739f558f9603b23c8ee = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_ff86d1c070a793e69e0b305914e51a65 = $(`<div id="html_ff86d1c070a793e69e0b305914e51a65" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#C2185B;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🎭 Ocio             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">THE MASK SPORT BAR</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_591190ebf9323739f558f9603b23c8ee.setContent(html_ff86d1c070a793e69e0b305914e51a65);
+            
+        
+
+        marker_841f4cedd4c45dbe319266b1fe2bfa2a.bindPopup(popup_591190ebf9323739f558f9603b23c8ee)
+        ;
+
+        
+    
+    
+            marker_841f4cedd4c45dbe319266b1fe2bfa2a.bindTooltip(
+                `<div>
+                     🎭 THE MASK SPORT BAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_841f4cedd4c45dbe319266b1fe2bfa2a.setIcon(icon_ab34cdc96d7ad6b0322d398944d6d1cb);
+            
+    
+            var marker_972bc2dd7580d45e26f655fc87fa28fc = L.marker(
+                [-17.3740594, -66.1538634],
+                {
+}
+            ).addTo(feature_group_50262a9884c4e5c38128ad5a0cf6ebc0);
+        
+    
+            var icon_edbba9a0d014a278200fe3909cb8ed4b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "music",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_67c17066ca799509cb3f03cd1477a076 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_9e93fc4e1635004066c01d55de644200 = $(`<div id="html_9e93fc4e1635004066c01d55de644200" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#C2185B;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🎭 Ocio             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">BULLA Restobar</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_67c17066ca799509cb3f03cd1477a076.setContent(html_9e93fc4e1635004066c01d55de644200);
+            
+        
+
+        marker_972bc2dd7580d45e26f655fc87fa28fc.bindPopup(popup_67c17066ca799509cb3f03cd1477a076)
+        ;
+
+        
+    
+    
+            marker_972bc2dd7580d45e26f655fc87fa28fc.bindTooltip(
+                `<div>
+                     🎭 BULLA Restobar
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_972bc2dd7580d45e26f655fc87fa28fc.setIcon(icon_edbba9a0d014a278200fe3909cb8ed4b);
+            
+    
+            feature_group_50262a9884c4e5c38128ad5a0cf6ebc0.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+    
+            var feature_group_c5b90884c1135cda37c51d3bbce99052 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_509760151bb2ba37dce845a0ee2619f5 = L.marker(
+                [-17.3743713, -66.1597127],
+                {
+}
+            ).addTo(feature_group_c5b90884c1135cda37c51d3bbce99052);
+        
+    
+            var icon_37e90a3242ba6c898479128bd90e55f6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plus-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a894002cba24a33fe080e331be16ed4a = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_e0d33985d5568de722b6df0daa620873 = $(`<div id="html_e0d33985d5568de722b6df0daa620873" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#B71C1C;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🏥 Salud             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Odontología Río</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Cerrado Temporalmente</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_a894002cba24a33fe080e331be16ed4a.setContent(html_e0d33985d5568de722b6df0daa620873);
+            
+        
+
+        marker_509760151bb2ba37dce845a0ee2619f5.bindPopup(popup_a894002cba24a33fe080e331be16ed4a)
+        ;
+
+        
+    
+    
+            marker_509760151bb2ba37dce845a0ee2619f5.bindTooltip(
+                `<div>
+                     🏥 Odontología Río
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_509760151bb2ba37dce845a0ee2619f5.setIcon(icon_37e90a3242ba6c898479128bd90e55f6);
+            
+    
+            var marker_c420156dce970e1b4e174c78981d507a = L.marker(
+                [-17.373265, -66.1558103],
+                {
+}
+            ).addTo(feature_group_c5b90884c1135cda37c51d3bbce99052);
+        
+    
+            var icon_a47a55a279b4e362acdb7b19032a773c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plus-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c1265664e4c53be6a7b07bdf775f681b = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_0b56749ac0c634b4f9a3058b3e67fdc2 = $(`<div id="html_0b56749ac0c634b4f9a3058b3e67fdc2" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#B71C1C;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🏥 Salud             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Clínica dental plus</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_c1265664e4c53be6a7b07bdf775f681b.setContent(html_0b56749ac0c634b4f9a3058b3e67fdc2);
+            
+        
+
+        marker_c420156dce970e1b4e174c78981d507a.bindPopup(popup_c1265664e4c53be6a7b07bdf775f681b)
+        ;
+
+        
+    
+    
+            marker_c420156dce970e1b4e174c78981d507a.bindTooltip(
+                `<div>
+                     🏥 Clínica dental plus
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c420156dce970e1b4e174c78981d507a.setIcon(icon_a47a55a279b4e362acdb7b19032a773c);
+            
+    
+            var marker_d9c0be9f3faae87529b7e85d20cf50db = L.marker(
+                [-17.3734188, -66.1557503],
+                {
+}
+            ).addTo(feature_group_c5b90884c1135cda37c51d3bbce99052);
+        
+    
+            var icon_10ce4cdc1aee33e4b6440e81685cd9b7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plus-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6e5cc08cdefa66c9d890b88869a7dcd1 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_5410b7b7c2484e8e6f8ae0cabec0be18 = $(`<div id="html_5410b7b7c2484e8e6f8ae0cabec0be18" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#B71C1C;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🏥 Salud             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">MP-Dental Studio</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_6e5cc08cdefa66c9d890b88869a7dcd1.setContent(html_5410b7b7c2484e8e6f8ae0cabec0be18);
+            
+        
+
+        marker_d9c0be9f3faae87529b7e85d20cf50db.bindPopup(popup_6e5cc08cdefa66c9d890b88869a7dcd1)
+        ;
+
+        
+    
+    
+            marker_d9c0be9f3faae87529b7e85d20cf50db.bindTooltip(
+                `<div>
+                     🏥 MP-Dental Studio
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d9c0be9f3faae87529b7e85d20cf50db.setIcon(icon_10ce4cdc1aee33e4b6440e81685cd9b7);
+            
+    
+            var marker_3d490eb757fb18af00191b3151598da4 = L.marker(
+                [-17.3750459, -66.1547912],
+                {
+}
+            ).addTo(feature_group_c5b90884c1135cda37c51d3bbce99052);
+        
+    
+            var icon_291a6c5eaf1949766a1d78c380b47a6f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plus-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2c4b1cf2b8732aee568bd45cc68d1de1 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_733c40d3dd74baea4e462bade009eae5 = $(`<div id="html_733c40d3dd74baea4e462bade009eae5" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#B71C1C;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🏥 Salud             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Centro De Hemodialisis Media Luna</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> No</p>     </div></div>`)[0];
+                popup_2c4b1cf2b8732aee568bd45cc68d1de1.setContent(html_733c40d3dd74baea4e462bade009eae5);
+            
+        
+
+        marker_3d490eb757fb18af00191b3151598da4.bindPopup(popup_2c4b1cf2b8732aee568bd45cc68d1de1)
+        ;
+
+        
+    
+    
+            marker_3d490eb757fb18af00191b3151598da4.bindTooltip(
+                `<div>
+                     🏥 Centro De Hemodialisis Media Luna
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3d490eb757fb18af00191b3151598da4.setIcon(icon_291a6c5eaf1949766a1d78c380b47a6f);
+            
+    
+            var marker_392a3c5069bff513decdf4603ceec7c8 = L.marker(
+                [-17.3766171, -66.1540224],
+                {
+}
+            ).addTo(feature_group_c5b90884c1135cda37c51d3bbce99052);
+        
+    
+            var icon_8c79a8d507d1b0e979965b20a77fb144 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plus-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5ab375c2aa18a30906f85f781a9b0c11 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_1e7b0bee364914a98b41023a753c7fee = $(`<div id="html_1e7b0bee364914a98b41023a753c7fee" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#B71C1C;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🏥 Salud             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">P.A.I.S.E Caja Nacional de Salud</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> No</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_5ab375c2aa18a30906f85f781a9b0c11.setContent(html_1e7b0bee364914a98b41023a753c7fee);
+            
+        
+
+        marker_392a3c5069bff513decdf4603ceec7c8.bindPopup(popup_5ab375c2aa18a30906f85f781a9b0c11)
+        ;
+
+        
+    
+    
+            marker_392a3c5069bff513decdf4603ceec7c8.bindTooltip(
+                `<div>
+                     🏥 P.A.I.S.E Caja Nacional de Salud
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_392a3c5069bff513decdf4603ceec7c8.setIcon(icon_8c79a8d507d1b0e979965b20a77fb144);
+            
+    
+            var marker_4b880790dcbcb1213e16c93d06807791 = L.marker(
+                [-17.377663, -66.1540867],
+                {
+}
+            ).addTo(feature_group_c5b90884c1135cda37c51d3bbce99052);
+        
+    
+            var icon_948a7ddc12b582f36b10e9e64e912fd8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plus-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2bf9a2fd3805eea6559ce4fb91bbe33a = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_d2be7aa2321ed6b3b883ae7589e46e09 = $(`<div id="html_d2be7aa2321ed6b3b883ae7589e46e09" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#B71C1C;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🏥 Salud             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Clínica Copacabana</h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT Cuenta con registro de SEPREC</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_2bf9a2fd3805eea6559ce4fb91bbe33a.setContent(html_d2be7aa2321ed6b3b883ae7589e46e09);
+            
+        
+
+        marker_4b880790dcbcb1213e16c93d06807791.bindPopup(popup_2bf9a2fd3805eea6559ce4fb91bbe33a)
+        ;
+
+        
+    
+    
+            marker_4b880790dcbcb1213e16c93d06807791.bindTooltip(
+                `<div>
+                     🏥 Clínica Copacabana
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4b880790dcbcb1213e16c93d06807791.setIcon(icon_948a7ddc12b582f36b10e9e64e912fd8);
+            
+    
+            feature_group_c5b90884c1135cda37c51d3bbce99052.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+    
+            var feature_group_81df80276f2d94b63dbe93fd8485b6f7 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_af3670b31074293469bc28f542bd3a90 = L.marker(
+                [-17.3750725, -66.1582113],
+                {
+}
+            ).addTo(feature_group_81df80276f2d94b63dbe93fd8485b6f7);
+        
+    
+            var icon_c36c8b8843bb88e828f575c075756509 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkblue",
+  "iconColor": "white",
+  "icon": "education",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a433945883ba493b479a44e5c6191869 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_b333a29196d084978ed1553acd76aa3b = $(`<div id="html_b333a29196d084978ed1553acd76aa3b" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:240px;">         <div style="background:#1A237E;padding:6px 10px;border-radius:6px 6px 0 0;margin:-1px -1px 8px;">             <span style="color:white;font-weight:bold;font-size:13px;">                 🎓 Universidad             </span>         </div>         <h4 style="margin:0 0 6px;color:#1F4E79;">Unifranz </h4>         <hr style="margin:4px 0;border-color:#ddd;">         <p style="margin:3px 0;"><b>Estado:</b> Abierto</p>         <p style="margin:3px 0;"><b>Formalización:</b> Cuenta con NIT Cuenta con registro de SEPREC</p>         <p style="margin:3px 0;"><b>Web / Redes:</b> Si</p>         <p style="margin:3px 0;"><b>Google Maps:</b> Si</p>         <p style="margin:3px 0;"><b>Reservas digitales:</b> Si</p>     </div></div>`)[0];
+                popup_a433945883ba493b479a44e5c6191869.setContent(html_b333a29196d084978ed1553acd76aa3b);
+            
+        
+
+        marker_af3670b31074293469bc28f542bd3a90.bindPopup(popup_a433945883ba493b479a44e5c6191869)
+        ;
+
+        
+    
+    
+            marker_af3670b31074293469bc28f542bd3a90.bindTooltip(
+                `<div>
+                     🎓 Unifranz 
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_af3670b31074293469bc28f542bd3a90.setIcon(icon_c36c8b8843bb88e828f575c075756509);
+            
+    
+            feature_group_81df80276f2d94b63dbe93fd8485b6f7.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+    
+            var layer_control_c8037a9d691b4c31c65baef3e383a10c_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_8dc32cd226dfee8ea95f511bbfcb418a,
+                },
+                overlays :  {
+                    "\ud83c\udfdb\ufe0f Infraestructura p\u00fablica" : feature_group_0dd7457f32f12d991ac91adf87141e85,
+                    "\ud83c\udf7d\ufe0f Gastronom\u00eda" : feature_group_d7da83b48f849ff315e18cab8b53f924,
+                    "\ud83c\udfe8 Hospedaje" : feature_group_36cd544348061d95b85614ee38d98b36,
+                    "\ud83c\udfad Ocio" : feature_group_50262a9884c4e5c38128ad5a0cf6ebc0,
+                    "\ud83c\udfe5 Salud" : feature_group_c5b90884c1135cda37c51d3bbce99052,
+                    "\ud83c\udf93 Universidad" : feature_group_81df80276f2d94b63dbe93fd8485b6f7,
+                },
+            };
+            let layer_control_c8037a9d691b4c31c65baef3e383a10c = L.control.layers(
+                layer_control_c8037a9d691b4c31c65baef3e383a10c_layers.base_layers,
+                layer_control_c8037a9d691b4c31c65baef3e383a10c_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+
+        
+    
+            tile_layer_8dc32cd226dfee8ea95f511bbfcb418a.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+    
+                marker_67e171358f7c26260a5729cdcc202ca0.setIcon(icon_0f24437be1d76a3b960e68646d3667f3);
+            
+    
+                marker_7333a6bf6416da57ac294aee077b70ee.setIcon(icon_a16af1122ab3ec096c605030ba4d8278);
+            
+    
+                marker_b993ea5b550217337cdb557ce93b68ed.setIcon(icon_4031769d2ff0b79719e08f342688a75c);
+            
+    
+                marker_eee229a5900993d5cfd9f638330ed92c.setIcon(icon_14a052b2abe608bdd72667805416a7c3);
+            
+    
+                marker_3ed3758cbb4ed3d206015decbf6741d6.setIcon(icon_e1bb4a5eb2dd0b464f9d6f21ac2014bb);
+            
+    
+                marker_62fe61aec5868d32402d9734f8b9c734.setIcon(icon_bad60c0cb849e82485774418fce0b700);
+            
+    
+                marker_09e1f9519b31f2d5a6bb81dd1ae16016.setIcon(icon_9f9c5dccdc8aa9866abe9b841e33a172);
+            
+    
+                marker_61cf16363cdd413a85a1a2b3a297f0d1.setIcon(icon_5088bcbca77d2fd6baaefff70577950e);
+            
+    
+                marker_e71e1ae388b624761f9b79f13b24be62.setIcon(icon_136d7e764061fb6055b28b7edb96a398);
+            
+    
+                marker_80091741c9ef4ac0a879920f16e54b6c.setIcon(icon_5c84a340732ee3c85f3c84c986f41839);
+            
+    
+                marker_77e35c521900f9d0a7060f699d7eaf3f.setIcon(icon_cde704aa9cea402974c8d4207eaa22b8);
+            
+    
+                marker_49398df53b67bae9ce4fc248297f64b7.setIcon(icon_5f20666eee3cbdb395b3820926eebc48);
+            
+    
+                marker_beffb79522d7e8f92de9151341ae8fb6.setIcon(icon_da090c1064da54598104e992f06f6e0a);
+            
+    
+                marker_fdd0b083183c6a9dcaee466e64bf8652.setIcon(icon_a30ef5da690861742276ee98e7c352ae);
+            
+    
+                marker_158068cb0691f7d1f6b5f41e4730f07f.setIcon(icon_226609a02f3668e1829cabc976b61981);
+            
+    
+                marker_f1fe866a7740addf3e9b2fa0dc157a01.setIcon(icon_ec1db636c01f2351d9b31d71a54338d8);
+            
+    
+            feature_group_0dd7457f32f12d991ac91adf87141e85.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+    
+                marker_56c9717b916c947016da85c94ef00194.setIcon(icon_799770952dc3731cbd30b93c1bef2556);
+            
+    
+                marker_96f5d4b9bd1500084940b613156d7a8d.setIcon(icon_a4a4ad2c0c5430d4c59b6868c95ec005);
+            
+    
+                marker_7cc941ab639de31f962f61fa8e4fa1ac.setIcon(icon_40375022ccfab0f599772f7ad0534079);
+            
+    
+                marker_eee853e9731145efc8d93bb689c0feae.setIcon(icon_8e1afa2844bca2093aefa322f0f585c9);
+            
+    
+                marker_f930a1a400b043e57888fae4363d3a8e.setIcon(icon_eca3d25122d825c23be347c6900e02f3);
+            
+    
+                marker_c49ef8e947609adc6574bb7774ac5afe.setIcon(icon_d8c3fd87fd426e0357d034322d7e23b3);
+            
+    
+                marker_2bb43c550c0c81fdbd234d4d2d5c5fba.setIcon(icon_257f37177b6acfe004d7068946c4e159);
+            
+    
+                marker_10d4fe269f322d3003e57a91622af5a8.setIcon(icon_2fce45528e5c21cec1286067fd99a8c9);
+            
+    
+                marker_95c439aa4bfc8119979afa00b93171d2.setIcon(icon_e2c8449fd6cb6faac1ac100f2a095f2b);
+            
+    
+                marker_6120b84d4ea461aa301c1abedcc982e6.setIcon(icon_afcd5e98c5f4c78126cfb1f32b632db2);
+            
+    
+                marker_0298caeb6916136ebbf26bb38a29641c.setIcon(icon_2e5c61642e2a7a22131b1763836ac192);
+            
+    
+                marker_cf3da70b25721552f76668a07b5ee4fc.setIcon(icon_968551bcbb9bf2dc615f143907142972);
+            
+    
+                marker_7734f1453ab55766f9e3ce45b6c257eb.setIcon(icon_fef8dbe8f7a5f973b4b8117bec327d96);
+            
+    
+                marker_99ec24375327e05d87b2e9d4ee5c0fa4.setIcon(icon_2843ecfbb887cf60954b79ad7d498da3);
+            
+    
+                marker_dd4d0c3e7a25b33fadfe7118068dd944.setIcon(icon_75450a2d1661194f05c4eff24e2c651c);
+            
+    
+                marker_f6150a17df6c9deb53a8621744ec609a.setIcon(icon_94ce208b547477c69d4c4bb996bd0db5);
+            
+    
+                marker_213835edbd20bdf35337d4ba6318f04b.setIcon(icon_879660b5a6d42b3f1d8bf58cf3cd6067);
+            
+    
+                marker_4b1f4c66bab166d28768c3083c13981d.setIcon(icon_3eeda745fafdf262cc37589cddc22bff);
+            
+    
+                marker_b4409a964b2d2b8d0d5d2d9441c61cca.setIcon(icon_cad5ab24c925a688d08778eb6b02b331);
+            
+    
+                marker_68f2b399bb7e09ff8902ad3b66ff7070.setIcon(icon_56256a77169540ad213b621fd0be2509);
+            
+    
+                marker_ebe5a8cfa7b094382755b04c9cd15f51.setIcon(icon_eb4003b97d200c99b95d6af2169b38e8);
+            
+    
+                marker_69487437f2850036957db047c171556f.setIcon(icon_27703be9c984e05736c2da8ae75cb222);
+            
+    
+                marker_66cdb82b9396347e406bb7aca97e2778.setIcon(icon_bc3c79a3ad5c7dd10f1d4c5caee474c4);
+            
+    
+                marker_57ea7377d0341e7cc56ad31a0f124f15.setIcon(icon_3576066a7a2340f554e65d90e36ca934);
+            
+    
+                marker_277b826e6b70d12eef1d774bf718dd33.setIcon(icon_012da5d414f9a4c1fe33320a734b7753);
+            
+    
+                marker_100ad16f2389680da3bdf489e5909970.setIcon(icon_6279f6b042828d941eac4d2def7b3212);
+            
+    
+                marker_9a6e185255ab293d4d4ca33c8df3a156.setIcon(icon_94dd98a5bc2d16ae680e7b7a87fd8a7c);
+            
+    
+                marker_8efa3841111bf01d8d51f3335cc4ffa2.setIcon(icon_e247d5eb4137d7e8d9579181f8d3b1de);
+            
+    
+                marker_17204d20b48193480b93f4a4fa99e8f8.setIcon(icon_142cc62aab0941824417f482b607296d);
+            
+    
+                marker_ee1f00364159e463856ce12c833442d3.setIcon(icon_512b8a043224e2609f29f2e5e66d1326);
+            
+    
+                marker_a00658f5b02ff89f444dfc243b7a7554.setIcon(icon_7eace61d1a8cff88020b4b9c592429ac);
+            
+    
+                marker_7738c766b29d8229c82e3fe3d2434217.setIcon(icon_c7c313f0206b2f50aebd744cbb10ee9e);
+            
+    
+                marker_301ee75011700755564eb81ff82fc1be.setIcon(icon_481b069c65cb8749eed6578f8d95b340);
+            
+    
+                marker_3484b05fec6cfab6095e2fafea40f00c.setIcon(icon_4bc18985c20c5a112a07f4a47e5a1ee7);
+            
+    
+                marker_52964c949540ec1e9a3cf2aa93a3c25c.setIcon(icon_eda14e0e2e75757ca28f799809eafd6f);
+            
+    
+                marker_561d694681a915e12c49a67d85f2d150.setIcon(icon_2a6c8961ebb79561b30aabe6b401c6cd);
+            
+    
+                marker_612d479f3c52a7d1081d5216a2f73e09.setIcon(icon_b4a18118459b0f16d5b1636e3505ad55);
+            
+    
+                marker_e7cf10e4786e689c8646c2986d230ecc.setIcon(icon_162f0b173578dcbcd91d4da38f7c0b5d);
+            
+    
+                marker_ad99177e0cca9ac1e719b51af720b78d.setIcon(icon_40af211771a2e5eb3221905de98db096);
+            
+    
+                marker_491d2c3399f337e694894728e66fdcc0.setIcon(icon_34a1bc6bc69d5e5c11d8e902cd271659);
+            
+    
+                marker_2faa4fc43af2ab339981d19d4fed3ad0.setIcon(icon_4a372647032009321fcf09ceeaa88d5a);
+            
+    
+                marker_2e429a95df7ddfee0926a8bdcb2119a4.setIcon(icon_853c51234b2a65d12d59589e472a7198);
+            
+    
+                marker_946d40ecdc0c37ef877db9c82aa311df.setIcon(icon_6a076194220be0c5fd1f389c323b41c0);
+            
+    
+            feature_group_d7da83b48f849ff315e18cab8b53f924.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+    
+                marker_445061713953b00276b61395bb4a9c3e.setIcon(icon_ddf7fad16449bad24efc6448ee27b052);
+            
+    
+                marker_4b3f8aaeb2bf6aa9087abf0e4ccdf369.setIcon(icon_c4834c019dbfd37e3ae005ca8d4d8eb6);
+            
+    
+                marker_c0cd832164b3dbe31ed37431ef01788f.setIcon(icon_26d5f2f3b45c2f8db1b1c77f5334c9ab);
+            
+    
+                marker_05f7f964312ff09be33c2c52c28a7ffb.setIcon(icon_0239f8ee84902f458f00f18ce4d33c3a);
+            
+    
+            feature_group_36cd544348061d95b85614ee38d98b36.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+    
+                marker_e34df6e678adb450592b387015e8a770.setIcon(icon_e3e4ad41c6bcfb5b6ebb122a9f2672df);
+            
+    
+                marker_c9ed27e8d433e5344e9a82af3a662715.setIcon(icon_c782cad5250575768e49f7c151a9b92f);
+            
+    
+                marker_841f4cedd4c45dbe319266b1fe2bfa2a.setIcon(icon_ab34cdc96d7ad6b0322d398944d6d1cb);
+            
+    
+                marker_972bc2dd7580d45e26f655fc87fa28fc.setIcon(icon_edbba9a0d014a278200fe3909cb8ed4b);
+            
+    
+            feature_group_50262a9884c4e5c38128ad5a0cf6ebc0.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+    
+                marker_509760151bb2ba37dce845a0ee2619f5.setIcon(icon_37e90a3242ba6c898479128bd90e55f6);
+            
+    
+                marker_c420156dce970e1b4e174c78981d507a.setIcon(icon_a47a55a279b4e362acdb7b19032a773c);
+            
+    
+                marker_d9c0be9f3faae87529b7e85d20cf50db.setIcon(icon_10ce4cdc1aee33e4b6440e81685cd9b7);
+            
+    
+                marker_3d490eb757fb18af00191b3151598da4.setIcon(icon_291a6c5eaf1949766a1d78c380b47a6f);
+            
+    
+                marker_392a3c5069bff513decdf4603ceec7c8.setIcon(icon_8c79a8d507d1b0e979965b20a77fb144);
+            
+    
+                marker_4b880790dcbcb1213e16c93d06807791.setIcon(icon_948a7ddc12b582f36b10e9e64e912fd8);
+            
+    
+            feature_group_c5b90884c1135cda37c51d3bbce99052.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+    
+                marker_af3670b31074293469bc28f542bd3a90.setIcon(icon_c36c8b8843bb88e828f575c075756509);
+            
+    
+            feature_group_81df80276f2d94b63dbe93fd8485b6f7.addTo(map_00fa73fc024b4c6e3a48cb8925e7b5e9);
+        
+</script>
+</html>
