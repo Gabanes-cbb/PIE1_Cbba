@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       document.getElementById('maptab-' + tab).classList.add('active');
       if (tab === 'kml' && !mapKMLInitialized) initMapKML();
-      if (tab === 'pie1' && !mapPIE1Initialized) setTimeout(initMapPIE1, 10x00);
+      if (tab === 'pie1' && !mapPIE1Initialized) setTimeout(initMapPIE1, 1000);
     });
   });
 
@@ -268,7 +268,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mapPIE1Initialized) return;
     mapPIE1Initialized = true;
 
-    mapPIE1 = L.map('map-pie1').setView([-17.3750, -66.1560], 15);
+    mapPIE1 = L.map('map-pie1').setView([-17.3750, -66.1560], 15); 
+	setTimeout(function(){ 
+	mapPIE1.invalidateSize(); }, 300);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '© <a href="https://carto.com">CARTO</a> · © <a href="https://openstreetmap.org">OpenStreetMap</a>',
       maxZoom: 19,
