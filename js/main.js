@@ -120,6 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function initMapKML() {
     if (mapKMLInitialized) return;
     mapKMLInitialized = true;
+setTimeout(function(){
+mapKML.invalidateSize(); }, 400);
 
     mapKML = L.map('map').setView(COCHABAMBA, 15);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
