@@ -142,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(r => r.ok ? r.text() : null)
       .then(text => { if (text) loadKMLText(text, 'pie1_mapeo.kml'); })
       .catch(() => {});
+      setTimeout(function(){ mapKML.invalidateSize(); }, 500);
   }
 
   function handleKMLUpload(e) {
