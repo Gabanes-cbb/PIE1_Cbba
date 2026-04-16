@@ -80,12 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.map-panel').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('maptab-' + tab).classList.add('active');
-      if (tab === 'kml' && !mapKMLInitialized) setTimeout(initMapKML, 300);
-      if (tab === 'pie1' && !mapPIE1Initialized) setTimeout(initMapPIE1, 300);
+      if (tab === 'kml' && !mapKMLInitialized) initMapKML();
+      if (tab === 'pie1' && !mapPIE1Initialized) initMapPIE1();
     });
   });
 
-// ── INE MAP PDF ──────────────────────────────────
+  // ── INE MAP PDF ──────────────────────────────────
   const inePlaceholder = document.getElementById('inePlaceholder');
   const ineFrame       = document.getElementById('ineMapFrame');
   const pdfPath        = 'assets/mapa_ine_pie1.pdf';
@@ -120,8 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function initMapKML() {
     if (mapKMLInitialized) return;
     mapKMLInitialized = true;
-setTimeout(function(){
-mapKML.invalidateSize(); }, 400);
 
     mapKML = L.map('map').setView(COCHABAMBA, 15);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -270,9 +268,7 @@ mapKML.invalidateSize(); }, 400);
     if (mapPIE1Initialized) return;
     mapPIE1Initialized = true;
 
-    mapPIE1 = L.map('map-pie1').setView([-17.3750, -66.1560], 15); 
-	setTimeout(function(){
-	mapPIE1.invalidateSize(); }, 400);
+    mapPIE1 = L.map('map-pie1').setView([-17.3750, -66.1560], 15);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '© <a href="https://carto.com">CARTO</a> · © <a href="https://openstreetmap.org">OpenStreetMap</a>',
       maxZoom: 19,
@@ -344,9 +340,7 @@ mapKML.invalidateSize(); }, 400);
     });
   }
 
-initMapKML();
-initMapPIE1();  
-// ── SMOOTH SCROLL ────────────────────────────────
+  // ── SMOOTH SCROLL ────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
