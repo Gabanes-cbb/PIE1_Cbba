@@ -85,8 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-initMapKML();
-initMapPIE1();  
 // ── INE MAP PDF ──────────────────────────────────
   const inePlaceholder = document.getElementById('inePlaceholder');
   const ineFrame       = document.getElementById('ineMapFrame');
@@ -346,7 +344,9 @@ mapKML.invalidateSize(); }, 400);
     });
   }
 
-  // ── SMOOTH SCROLL ────────────────────────────────
+initMapKML();
+initMapPIE1();  
+// ── SMOOTH SCROLL ────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
