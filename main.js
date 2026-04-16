@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.map-panel').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('maptab-' + tab).classList.add('active');
-      if (tab === 'kml' && !mapKMLInitialized) initMapKML();
+      if (tab === 'kml' && !mapKMLInitialized) { initMapKML(); } else if (tab === 'kml' && mapKML) { setTimeout(function(){ mapKML.invalidateSize(); }, 100); }
       if (tab === 'pie1' && !mapPIE1Initialized) initMapPIE1();
     });
   });
@@ -142,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(r => r.ok ? r.text() : null)
       .then(text => { if (text) loadKMLText(text, 'pie1_mapeo.kml'); })
       .catch(() => {});
+      setTimeout(function(){ mapKML.invalidateSize(); }, 500);
   }
 
   function handleKMLUpload(e) {
