@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       document.getElementById('maptab-' + tab).classList.add('active');
       if (tab === 'kml' && !mapKMLInitialized) initMapKML();
-      if (tab === 'pie1' && !mapPIE1Initialized) initMapPIE1();
+if (tab === 'pie1') window.open('data/mapa_PIE1_completo.html', '_blank');
     });
   });
 
