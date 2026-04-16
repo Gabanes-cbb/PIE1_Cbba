@@ -451,8 +451,8 @@ body {
   transition: all .15s;
 }
 .map-tab-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
-.map-panel { display: none; }
-.map-panel.active { display: block; animation: fadeIn .25s ease; }
+.map-panel { display: block; visibility: hidden; height: 0; overflow: hidden; }
+.map-panel.active { display: block; visibility: visible; height: auto; overflow: visible; animation: fadeIn; }
 .map-description { background: var(--light); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.5rem; font-size: .9rem; }
 .map-description p { color: var(--muted); margin-bottom: .4rem; }
 
