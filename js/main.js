@@ -85,7 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── INE MAP PDF ──────────────────────────────────
+initMapKML();
+initMapPIE1();  
+// ── INE MAP PDF ──────────────────────────────────
   const inePlaceholder = document.getElementById('inePlaceholder');
   const ineFrame       = document.getElementById('ineMapFrame');
   const pdfPath        = 'assets/mapa_ine_pie1.pdf';
