@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script>document.documentElement.classList.toggle("hero-embed", new URLSearchParams(window.location.search).get("hero") === "1");</script>
+    <style>.hero-embed body > div[style*="position:fixed"]{display:none!important}</style>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
@@ -3739,10 +3741,15 @@
                 layer_control_21ae9f2191338cf364698a95f2409f55_layers.overlays,
                 {
   "position": "topright",
-  "collapsed": false,
+  "collapsed": new URLSearchParams(window.location.search).get("hero") === "1",
   "autoZIndex": true,
 }
             ).addTo(map_a8734b2b75c47d3d1ad150caf18cbef4);
+
+            if (new URLSearchParams(window.location.search).get("hero") === "1") {
+                layer_control_21ae9f2191338cf364698a95f2409f55.remove();
+                map_a8734b2b75c47d3d1ad150caf18cbef4.zoomControl.setPosition("topleft");
+            }
 
         
 </script>
